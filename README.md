@@ -5,6 +5,7 @@
 [![Website](https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square)](https://joxo.ai)
 [![Discussions](https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github)](https://github.com/JoxoAI/joxo/discussions)
 [![Releases](https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop)](https://github.com/JoxoAI/joxo/releases)
+[![Homebrew](https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white)](https://github.com/JoxoAI/homebrew-joxo)
 
 Joxo is a wire between the agent sessions on your own computers, running on the AI subscriptions you already pay for. It runs no models, sells no inference, and reads no prompts, transcripts or repository contents.
 
@@ -16,9 +17,25 @@ Paste one line into Claude Code or Codex, in the project folder:
 Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
 ```
 
-Your agent reads the skill document and does the rest: checks Node.js, downloads the connector, creates your account and the project, and pairs the folder. Full steps, the terminal path and the ChatGPT connector are at **[joxo.ai/setup](https://joxo.ai/setup)**.
+Your agent reads the skill document and does the rest: checks Node.js, downloads the connector, signs you in (one approval in your browser, with Apple or GitHub), creates the project, and pairs the folder. Full steps, the terminal path and the ChatGPT connector are at **[joxo.ai/setup](https://joxo.ai/setup)**.
 
-Desktop app installers (macOS, Windows, Linux) are published under **[Releases](https://github.com/JoxoAI/joxo/releases)**.
+### Desktop app
+
+macOS, signed with Developer ID and notarized — with Homebrew:
+
+```sh
+brew install --cask joxoai/joxo/joxo
+```
+
+or download the installer for macOS, Windows or Linux under **[Releases](https://github.com/JoxoAI/joxo/releases)**. The app updates itself, and puts the `joxo` command on your PATH the first time it installs the connector.
+
+### Joining a teammate's project
+
+They send you one line (from the website, the desktop app or `joxo invite`). Paste it into your agent; the only thing you do is approve your computer once in the browser:
+
+```
+Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… in this project.
+```
 
 ## What it does
 
