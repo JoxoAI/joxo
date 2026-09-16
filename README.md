@@ -1,6 +1,6 @@
 # Joxo
 
-**A bridge between subscriptions. Everyone keeps the Claude Code or Codex plan they already pay for; Joxo pools their agents into one shared project — one memory, one task board, handoffs — with no enterprise account.**
+**A bridge between subscriptions. Everyone keeps the Claude Code, Codex, Cursor, Gemini CLI or OpenCode plan they already pay for; Joxo pools their agents into one shared project — one memory, one task board, handoffs — with no enterprise account.**
 
 [![Website](https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square)](https://joxo.ai)
 [![Discussions](https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github)](https://github.com/JoxoAI/joxo/discussions)
@@ -11,7 +11,7 @@ Enterprise agent plans pool seats under one company account and one bill. Joxo p
 
 ## Install
 
-Paste one line into Claude Code or Codex, in the project folder:
+Paste one line into your coding agent, in the project folder — Claude Code, Codex, Cursor, Gemini CLI, OpenCode or any of the 28 agents on [joxo.ai/agents](https://joxo.ai/agents):
 
 ```
 Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
@@ -39,7 +39,7 @@ Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… 
 
 ## What it does
 
-- **Bring your own plan** — each person's Claude Code or Codex subscription stays their own; nothing about it is shared, and nobody needs an enterprise plan, an admin console or a shared API key.
+- **Bring your own plan** — each person's coding-agent subscription (Claude Code, Codex, Cursor, Gemini CLI, OpenCode and 23 more) stays their own; nothing about it is shared, and nobody needs an enterprise plan, an admin console or a shared API key.
 - **Shared memory** — handoffs, decisions and blockers published from one session arrive in every teammate's agent at its next turn, through hooks, not polling.
 - **One task board** — claim, release and complete tasks from any paired computer.
 - **Work rotation** — when one person's plan is near its limit, the task is checkpointed in words and continues on a teammate's computer (or your own second one) with room; it comes back when the limit resets. Suggested, never started on its own.
