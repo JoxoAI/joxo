@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question or share a setup
+    url: https://github.com/JoxoAI/joxo/discussions
+    about: Usage questions, ideas and setups live in Discussions.
+  - name: Report a security problem
+    url: https://github.com/JoxoAI/joxo/blob/main/SECURITY.md
+    about: Please email support@joxo.ai instead of opening a public issue.
+  - name: Billing or account help
+    url: mailto:support@joxo.ai
+    about: Anything involving your subscription or account — email, so nothing private lands in a public issue.

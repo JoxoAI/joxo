@@ -1,0 +1,73 @@
+name: Bug report
+description: Something in Joxo did not do what it says.
+title: "[Bug] "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks — a good bug report is one we can reproduce. Never paste sign-in links, invitation links, tokens, or the contents of `.joxo/` here.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did it happen?
+      options:
+        - Connector / CLI (joxo …)
+        - Claude Code integration (hooks, MCP tools)
+        - Codex integration (joxo codex)
+        - ChatGPT connector
+        - Desktop app (macOS)
+        - Desktop app (Windows)
+        - Desktop app (Linux)
+        - iPhone app
+        - Android app
+        - Website (joxo.ai)
+        - Billing / checkout
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Joxo version
+      description: "`joxo status` prints the connector version; the desktop app shows its version in Settings → About."
+      placeholder: "connector 0.2.0 / desktop 0.1.1"
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and version
+      placeholder: "macOS 15.3 · Windows 11 · Ubuntu 24.04 · iOS 18"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. …
+        2. …
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Relevant output
+      description: Terminal output, the agent's message, or a screenshot. Redact anything private.
+      render: shell
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and discussions.
+          required: true
+        - label: This report contains no sign-in link, invitation, token or private data.
+          required: true

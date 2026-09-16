@@ -1,0 +1,39 @@
+name: Feature request
+description: Something Joxo should do, or do differently.
+title: "[Feature] "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem you are solving, not only the solution you have in mind — the problem is what lets us judge the best fix.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do, and what gets in the way?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like Joxo to do?
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Which part of Joxo?
+      multiple: true
+      options:
+        - Connector / CLI
+        - Claude Code integration
+        - Codex integration
+        - ChatGPT connector
+        - Desktop app
+        - Phone app
+        - Website / account / billing
+        - Something else
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What do you do today instead?
