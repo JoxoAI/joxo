@@ -1,13 +1,13 @@
 # Joxo
 
-**One project memory and one task board for the Claude Code and Codex sessions on the computers you own — and when one hits its usage limit, the work moves to a machine that still has room.**
+**A bridge between subscriptions. Everyone keeps the Claude Code or Codex plan they already pay for; Joxo pools their agents into one shared project — one memory, one task board, handoffs — with no enterprise account.**
 
 [![Website](https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square)](https://joxo.ai)
 [![Discussions](https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github)](https://github.com/JoxoAI/joxo/discussions)
 [![Releases](https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop)](https://github.com/JoxoAI/joxo/releases)
 [![Homebrew](https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white)](https://github.com/JoxoAI/homebrew-joxo)
 
-Joxo is a wire between the agent sessions on your own computers, running on the AI subscriptions you already pay for. It runs no models, sells no inference, and reads no prompts, transcripts or repository contents.
+Enterprise agent plans pool seats under one company account and one bill. Joxo pools the plans people already have — a freelancer on Claude Max, a friend on Codex, you on Pro — into one project where everyone pays their own way and every agent sees the same context. It runs no models, sells no inference, and reads no prompts, transcripts or repository contents.
 
 ## Install
 
@@ -39,9 +39,10 @@ Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… 
 
 ## What it does
 
-- **Shared memory** — handoffs, decisions and blockers published from one session arrive in the other at its next turn, through hooks, not polling.
+- **Bring your own plan** — each person's Claude Code or Codex subscription stays their own; nothing about it is shared, and nobody needs an enterprise plan, an admin console or a shared API key.
+- **Shared memory** — handoffs, decisions and blockers published from one session arrive in every teammate's agent at its next turn, through hooks, not polling.
 - **One task board** — claim, release and complete tasks from any paired computer.
-- **Work rotation** — when a computer is near its provider limit, the task is checkpointed in words and continues on a paired computer with room; it comes back when the limit resets. Suggested, never started on its own.
+- **Work rotation** — when one person's plan is near its limit, the task is checkpointed in words and continues on a teammate's computer (or your own second one) with room; it comes back when the limit resets. Suggested, never started on its own.
 - **Teammates** — one single-use invitation; their computer, their agent, their subscription.
 - **Four surfaces, one job each** — the CLI/connector runs on each computer; the desktop app is the workspace; the phone is notifications and remote control; the website is account, team, billing and invitations.
 
