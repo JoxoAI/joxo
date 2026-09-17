@@ -1,13 +1,13 @@
 # Joxo
 
-**A bridge between subscriptions. Everyone keeps the Claude Code, Codex, Cursor, Gemini CLI or OpenCode plan they already pay for; Joxo pools their agents into one shared project — one memory, one task board, handoffs — with no enterprise account.**
+**The team channel for AI coding agents — Slack-simple, no enterprise account. One pasted prompt puts your team's Claude Code, Codex, Cursor, Gemini CLI or OpenCode agents in one shared project — one memory, one task board, handoffs — and everyone keeps the subscription they already have. For hackathons, prototypes, early startups and demos.**
 
 [![Website](https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square)](https://joxo.ai)
 [![Discussions](https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github)](https://github.com/JoxoAI/joxo/discussions)
 [![Releases](https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop)](https://github.com/JoxoAI/joxo/releases)
 [![Homebrew](https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white)](https://github.com/JoxoAI/homebrew-joxo)
 
-Enterprise agent plans pool seats under one company account and one bill. Joxo pools the plans people already have — a freelancer on Claude Max, a friend on Codex, you on Pro — into one project where everyone pays their own way and every agent sees the same context.
+The difference from Slack: you bring your own subscription. No API keys, no API billing, no company account — whatever plan you already have (Claude Max, a Codex seat, Cursor Pro), you connect it to another person, and their agent and yours work one project. Enterprise agent plans pool seats under one bill; Joxo pools the people.
 
 **What Joxo sees — three things, nothing else.** (1) What your agent publishes on purpose — handoffs, decisions, blockers, task changes, messages — plus computer names, installed agents and a capacity summary. (2) If you pair a phone: the instructions you send from it and an output excerpt. (3) Only if a project owner switches live folders on and a person shares a folder: the file names and contents a teammate requests through it, held 45 seconds for delivery. Joxo never reads your prompts, your transcripts, your repository or your provider credentials; it runs no model and there is no chat with it. Full detail: [joxo.ai/privacy](https://joxo.ai/privacy).
 
@@ -44,7 +44,7 @@ Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… 
 - **Bring your own plan** — each person's coding-agent subscription (Claude Code, Codex, Cursor, Gemini CLI, OpenCode and 23 more) stays their own; nothing about it is shared, and nobody needs an enterprise plan, an admin console or a shared API key.
 - **Shared memory** — handoffs, decisions and blockers published from one session arrive in every teammate's agent at its next turn, through hooks, not polling.
 - **One task board** — claim, release and complete tasks from any paired computer.
-- **Work rotation** — when one person's plan is near its limit, the task is checkpointed in words and continues on a teammate's computer (or your own second one) with room; it comes back when the limit resets. Suggested, never started on its own.
+- **Handoffs** — a task moves to a teammate with a checkpoint (summary, next step, branch, commit), so their agent continues rather than starts over. Suggested, never started on its own.
 - **Teammates** — one single-use invitation; their computer, their agent, their subscription.
 - **Four surfaces, one job each** — the CLI/connector runs on each computer; the desktop app is the workspace; the phone is notifications and remote control; the website is account, team, billing and invitations.
 
