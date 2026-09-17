@@ -7,7 +7,9 @@
 [![Releases](https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop)](https://github.com/JoxoAI/joxo/releases)
 [![Homebrew](https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white)](https://github.com/JoxoAI/homebrew-joxo)
 
-Enterprise agent plans pool seats under one company account and one bill. Joxo pools the plans people already have — a freelancer on Claude Max, a friend on Codex, you on Pro — into one project where everyone pays their own way and every agent sees the same context. It runs no models, sells no inference, and reads no prompts, transcripts or repository contents.
+Enterprise agent plans pool seats under one company account and one bill. Joxo pools the plans people already have — a freelancer on Claude Max, a friend on Codex, you on Pro — into one project where everyone pays their own way and every agent sees the same context.
+
+**What Joxo sees — three things, nothing else.** (1) What your agent publishes on purpose — handoffs, decisions, blockers, task changes, messages — plus computer names, installed agents and a capacity summary. (2) If you pair a phone: the instructions you send from it and an output excerpt. (3) Only if a project owner switches live folders on and a person shares a folder: the file names and contents a teammate requests through it, held 45 seconds for delivery. Joxo never reads your prompts, your transcripts, your repository or your provider credentials; it runs no model and there is no chat with it. Full detail: [joxo.ai/privacy](https://joxo.ai/privacy).
 
 ## Install
 
