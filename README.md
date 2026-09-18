@@ -17,7 +17,7 @@ For hackathons, prototypes, early startups and demos.</p>
 </p>
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU"><img src="https://joxo.ai/media/joxo-launch.gif" width="720" alt="Paste one prompt, a teammate pastes one line, and his agent already knows the decision"></a><br>
+  <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU"><img src="media/joxo-launch.gif" width="720" alt="Paste one prompt, a teammate pastes one line, and his agent already knows the decision"></a><br>
   <sub>Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU">Watch with sound (28 s)</a>.</sub>
 </p>
 
