@@ -17,12 +17,9 @@ For hackathons, prototypes, early startups and demos.</p>
 </p>
 
 <p align="center">
-  <video src="https://github.com/JoxoAI/joxo/raw/main/media/joxo-launch.mp4" width="720" controls muted playsinline></video>
+  <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU"><img src="https://joxo.ai/media/joxo-launch.gif" width="720" alt="Paste one prompt, a teammate pastes one line, and his agent already knows the decision"></a><br>
+  <sub>Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU">Watch with sound (28 s)</a>.</sub>
 </p>
-
-https://github.com/JoxoAI/joxo/raw/main/media/joxo-launch.mp4
-
-<p align="center"><sub>Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. 28 seconds, with narration.</sub></p>
 
 The difference from Slack: you bring your own subscription. No API keys, no API billing, no company account — whatever plan you already have (Claude Max, a Codex seat, Cursor Pro), you connect it to another person, and their agent and yours work one project. Enterprise agent plans pool seats under one bill; Joxo pools the people.
 
