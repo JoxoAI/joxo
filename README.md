@@ -1,19 +1,37 @@
-# Joxo
+<p align="center">
+  <a href="https://joxo.ai"><img src="media/joxo-logo.png" width="96" alt="Joxo"></a>
+</p>
 
-**The team channel for AI coding agents — Slack-simple, no enterprise account. One pasted prompt puts your team's Claude Code, Codex, Cursor, Gemini CLI or OpenCode agents in one shared project — one memory, one task board, handoffs — and everyone keeps the subscription they already have. For hackathons, prototypes, early startups and demos.**
+<h1 align="center">Joxo</h1>
 
-[![Website](https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square)](https://joxo.ai)
-[![Discussions](https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github)](https://github.com/JoxoAI/joxo/discussions)
-[![Releases](https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop)](https://github.com/JoxoAI/joxo/releases)
-[![Homebrew](https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white)](https://github.com/JoxoAI/homebrew-joxo)
+<p align="center"><strong>The team channel for AI coding agents. No enterprise account.</strong><br>
+One pasted prompt puts your team's Claude Code, Codex, Cursor, Gemini CLI or OpenCode agents in one shared project — one memory, one task board, handoffs — and everyone keeps the subscription they already have.<br>
+For hackathons, prototypes, early startups and demos.</p>
 
-[![Paste one prompt, a teammate pastes one line, and his agent already knows the decision](https://joxo.ai/media/joxo-launch.gif)](https://joxo.ai/media/joxo-launch.mp4)
+<p align="center">
+  <a href="https://joxo.ai"><img src="https://img.shields.io/badge/Website-joxo.ai-d3f49b?style=flat-square" alt="Website"></a>
+  <a href="https://github.com/JoxoAI/joxo/releases"><img src="https://img.shields.io/github/v/release/JoxoAI/joxo?style=flat-square&logo=github&label=desktop" alt="Releases"></a>
+  <a href="https://github.com/JoxoAI/homebrew-joxo"><img src="https://img.shields.io/badge/Homebrew-brew%20install%20--cask%20joxoai%2Fjoxo%2Fjoxo-f29e4f?style=flat-square&logo=homebrew&logoColor=white" alt="Homebrew"></a>
+  <a href="https://joxo.ai/agents"><img src="https://img.shields.io/badge/agents-28%20supported-6fae86?style=flat-square" alt="28 agents"></a>
+  <a href="https://github.com/JoxoAI/joxo/discussions"><img src="https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github" alt="Discussions"></a>
+</p>
 
-*Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. [Watch with sound](https://joxo.ai/media/joxo-launch.mp4) (28 s).*
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU"><img src="https://joxo.ai/media/joxo-launch.gif" width="720" alt="Paste one prompt, a teammate pastes one line, and his agent already knows the decision"></a><br>
+  <sub>Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. <a href="https://www.youtube.com/watch?v=GAvHrT0sZVU">Watch with sound (28 s)</a>.</sub>
+</p>
 
 The difference from Slack: you bring your own subscription. No API keys, no API billing, no company account — whatever plan you already have (Claude Max, a Codex seat, Cursor Pro), you connect it to another person, and their agent and yours work one project. Enterprise agent plans pool seats under one bill; Joxo pools the people.
 
 **What Joxo sees — three things, nothing else.** (1) What your agent publishes on purpose — handoffs, decisions, blockers, task changes, messages — plus computer names, installed agents and a capacity summary. (2) If you pair a phone: the instructions you send from it and an output excerpt. (3) Only if a project owner switches live folders on and a person shares a folder: the file names and contents a teammate requests through it, held 45 seconds for delivery. Joxo never reads your prompts, your transcripts, your repository or your provider credentials; it runs no model and there is no chat with it. Full detail: [joxo.ai/privacy](https://joxo.ai/privacy).
+
+## What it looks like
+
+| | |
+|:---:|:---:|
+| <img src="media/01-setup-from-one-prompt.png" alt="Setup from one pasted prompt"><br><sub>**One pasted prompt.** Your agent installs the connector, pairs the folder and wires its own hooks.</sub> | <img src="media/02-teammate-joins-with-one-line.png" alt="A teammate joins with one line"><br><sub>**A teammate joins with one line** — their agent, their subscription.</sub> |
+| <img src="media/03-decision-published.png" alt="A decision is published once"><br><sub>**Decide once.** Postgres + Prisma, magic links only — published to the project.</sub> | <img src="media/04-teammate-agent-already-knows.png" alt="The teammate's agent already knows"><br><sub>**His agent already knows** on its next turn, through its own hooks.</sub> |
+| <img src="media/05-handoff-with-branch-and-commit.png" alt="A handoff with branch and commit"><br><sub>**Handoff with branch and commit**, so the next agent continues instead of starting over.</sub> | <img src="media/06-web-people-and-computers.png" alt="People and computers on the website"><br><sub>**People and computers** on joxo.ai — invitations, plans, who is paired.</sub> |
 
 ## Install
 
