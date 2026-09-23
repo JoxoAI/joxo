@@ -30,7 +30,7 @@ body:
     attributes:
       label: Joxo version
       description: "`joxo status` prints the connector version; the desktop app shows its version in Settings → About."
-      placeholder: "connector 0.2.0 / desktop 0.1.1"
+      placeholder: "connector 0.2.10 / desktop 0.2.9"
     validations:
       required: true
   - type: input

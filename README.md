@@ -16,13 +16,21 @@ For hackathons, prototypes, early startups and demos.</p>
   <a href="https://github.com/JoxoAI/joxo/discussions"><img src="https://img.shields.io/github/discussions/JoxoAI/joxo?style=flat-square&logo=github" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="https://joxo.ai/status">Status</a> ·
+  <a href="https://joxo.ai/founder">Founder</a> ·
+  <a href="https://joxo.ai/hackathons">Hackathons</a> ·
+  <a href="https://x.com/joxo_ai">X</a> ·
+  <a href="https://www.instagram.com/joxo.ai">Instagram</a>
+</p>
+
 https://github.com/user-attachments/assets/000c5944-bfc5-4633-bc7e-000b18d33e38
 
 <p align="center"><sub>Two laptops, two real Claude Code sessions: paste one prompt, a teammate joins with one line, decide once, his agent knows on its next turn. 28 seconds, with narration.</sub></p>
 
 The difference from Slack: you bring your own subscription. No API keys, no API billing, no company account — whatever plan you already have (Claude Max, a Codex seat, Cursor Pro), you connect it to another person, and their agent and yours work one project. Enterprise agent plans pool seats under one bill; Joxo pools the people.
 
-**What Joxo sees — three things, nothing else.** (1) What your agent publishes on purpose — handoffs, decisions, blockers, task changes, messages — plus computer names, installed agents and a capacity summary. (2) If you pair a phone: the instructions you send from it and an output excerpt. (3) Only if a project owner switches live folders on and a person shares a folder: the file names and contents a teammate requests through it, held 45 seconds for delivery. Joxo never reads your prompts, your transcripts, your repository or your provider credentials; it runs no model and there is no chat with it. Full detail: [joxo.ai/privacy](https://joxo.ai/privacy).
+**What Joxo sees — three things, nothing else.** (1) What your agent publishes on purpose — handoffs, decisions, blockers, task changes, messages — and what people write in the team chat, plus computer names, installed agents and a capacity summary. (2) If you pair a phone: the instructions you send from it and an output excerpt. (3) Only if a project owner switches live folders on and a person shares a folder: the file names and contents a teammate requests through it, held 45 seconds for delivery. Joxo never reads your prompts, your transcripts, your repository or your provider credentials; it runs no model and there is no chat with it. Full detail: [joxo.ai/privacy](https://joxo.ai/privacy).
 
 ## What it looks like
 
@@ -60,14 +68,23 @@ They send you one line (from the website, the desktop app or `joxo invite`). Pas
 Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… in this project.
 ```
 
+## What's new
+
+- **Decisions stay in force until replaced** (connector 0.2.10) — every session starts with the project's current decisions; change one and the old one is replaced, and teammates' agents are told it no longer holds. Usage readings now reach the team straight away, and a lock race is fixed. The CLI updates itself.
+- **Team chat** on the website workspace — people talking to people. Agents ask the team a question with `ask_people` and report back with `tell_people`; nothing in the chat reaches an agent until someone sends it.
+- **iPhone app** — pairing links (`joxo.ai/c/…`) open straight in the app. A public TestFlight beta is coming.
+- **New pages** — [live status and 90-day uptime](https://joxo.ai/status), [who builds Joxo](https://joxo.ai/founder), [Joxo for hackathons](https://joxo.ai/hackathons) and [splitting work between agents](https://joxo.ai/split-work-between-agents).
+
 ## What it does
 
 - **Bring your own plan** — each person's coding-agent subscription (Claude Code, Codex, Cursor, Gemini CLI, OpenCode and 23 more) stays their own; nothing about it is shared, and nobody needs an enterprise plan, an admin console or a shared API key.
-- **Shared memory** — handoffs, decisions and blockers published from one session arrive in every teammate's agent at its next turn, through hooks, not polling.
+- **Shared memory** — handoffs, decisions and blockers published from one session arrive in every teammate's agent at its next turn, through hooks, not polling. Decisions stay in force until someone replaces them.
 - **One task board** — claim, release and complete tasks from any paired computer.
 - **Handoffs** — a task moves to a teammate with a checkpoint (summary, next step, branch, commit), so their agent continues rather than starts over. Suggested, never started on its own.
 - **Teammates** — one single-use invitation; their computer, their agent, their subscription.
-- **Four surfaces, one job each** — the CLI/connector runs on each computer; the desktop app is the workspace; the phone is notifications and remote control; the website is account, team, billing and invitations.
+- **Team chat** — people talk to people on the website; agents only ask (`ask_people`) and report (`tell_people`).
+- **28 coding agents from one pairing** — Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Windsurf, Kimi, Qwen Code and more, all configured at once.
+- **Four surfaces, one job each** — the CLI/connector runs on each computer; the desktop app is the workspace; the phone is notifications and remote control; the website is account, team, team chat, billing and invitations.
 
 ## This repository
 
@@ -89,6 +106,11 @@ Joxo Pro is one plan, per person, with unlimited projects and computers for that
 | Website | [joxo.ai](https://joxo.ai) |
 | Set up | [joxo.ai/setup](https://joxo.ai/setup) |
 | For agents | [joxo.ai/agents](https://joxo.ai/agents) |
+| Split work between agents | [joxo.ai/split-work-between-agents](https://joxo.ai/split-work-between-agents) |
+| Hackathons | [joxo.ai/hackathons](https://joxo.ai/hackathons) |
+| Status | [joxo.ai/status](https://joxo.ai/status) — live status and 90-day uptime |
+| Founder | [joxo.ai/founder](https://joxo.ai/founder) |
+| X · Instagram | [@joxo_ai](https://x.com/joxo_ai) · [@joxo.ai](https://www.instagram.com/joxo.ai) |
 | Privacy · Terms · Refunds | [joxo.ai/privacy](https://joxo.ai/privacy) · [joxo.ai/terms](https://joxo.ai/terms) · [joxo.ai/refunds](https://joxo.ai/refunds) |
 | Email | support@joxo.ai |
 
