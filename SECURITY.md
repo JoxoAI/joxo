@@ -1,6 +1,6 @@
 # Security
 
-Joxo pairs your computers and moves your own work between them, so we treat security reports as the most important issues we receive.
+Joxo connects your team's coding agents across your computers, so we treat security reports as the most important issues we receive.
 
 ## Reporting a vulnerability
 
@@ -10,10 +10,10 @@ You will get a human reply within three working days. We ask that you give us re
 
 ## Scope
 
-- The relay at joxo.ai and its API
+- The joxo.ai website and service
 - The connector (`joxo` CLI / MCP server)
-- The desktop, iOS and Android apps
-- Billing (Paddle checkout, the App Store and Google Play purchase paths)
+- The desktop and iPhone apps
+- Billing on joxo.ai
 
 ## Out of scope
 
