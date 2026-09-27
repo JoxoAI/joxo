@@ -26,8 +26,16 @@ In PowerShell:
 ```
 
 `<link>` is what the person gave you, single-quoted as shown: a setup link (`https://joxo.ai/j/…`), an
-invitation (`https://joxo.ai/#invite=…`), or nothing at all when they are starting fresh (then drop
-`-s -- '<link>'`, or the quoted link in PowerShell).
+invitation (`https://joxo.ai/i/…`, or the older `https://joxo.ai/#invite=…`), or nothing at all when they are
+starting fresh (then drop `-s -- '<link>'`, or the quoted link in PowerShell).
+
+No invitation, but this folder is a clone of the project's GitHub repository and the person wants
+to join that project? Put `--request` where the link goes (`sh -s -- --request`; in PowerShell,
+`--request` after the script block). It signs them in, asks the project's owner, and connects the
+folder once the owner approves; it exits 75 while nobody has answered (see below).
+
+Someone who started on the phone can also open https://joxo.ai/go on this computer and scan it with the Joxo
+app: the browser signs in and opens a fresh setup link for their project.
 
 What it does, in order:
 
@@ -52,9 +60,9 @@ exit status says the rest:
 
 - **0**: connected. Your hooks work in this session already; Joxo's tools load in your next one,
   and until then you use the `joxo` command.
-- **75**: still waiting for the approval in the browser. Run the command its last lines name
-  (`joxo connect --continue`) in the same folder right away; it picks up where it stopped and opens
-  nothing new.
+- **75**: still waiting: for the approval in the browser, or for the owner's answer to a request.
+  Run the command its last lines name (`joxo connect --continue`, or `joxo connect --request`) in
+  the same folder right away; it picks up where it stopped and opens or asks nothing new.
 - **64**: it needs one answer from the person (which folder, which of their projects). The output
   names the question and the command to run with the answer.
 - anything else: show the person the error; it names the fix.
@@ -106,12 +114,21 @@ The same in three steps, each its own command:
   agent is added by pasting the same line into it, or with `joxo setup --agents <id>`.
 - `joxo invite`: project owner or admin; prints the one line a teammate pastes, with their
   invitation in it.
-- `joxo phone`: pair the person's iPhone for alerts when an agent is waiting on them.
+- `joxo phone`: when the person wants Joxo on their iPhone. Run by you, it opens a code in their
+  browser and waits up to 100 seconds; it never prints the code's link, so there is nothing to copy.
+  They scan it with the iPhone Camera or the Joxo app and tap once: the phone is signed in to their
+  account, opens this project, and is paired with this computer. Tell them the code is open in their
+  browser; read out the eight-character code it prints only if they say the camera can't read it. If
+  it says no browser opened, ask them to run `joxo phone` in their own terminal. It prints who
+  scanned; if they scan after it stops waiting, nothing else needs running. `joxo phone --sign-out`
+  signs out the phone that last scanned this computer's code.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>
   "<message>"`: publish to the project, replace a decision, nudge one teammate's computer.
 - `joxo control keep-going on|off`, `joxo control team-tasks on|off`, `joxo control permissions
   on`: whether this computer's agent carries on when work comes back, starts on tasks a teammate
   gives it, and asks the person's phone about permission prompts. Only the person changes these.
+- `joxo listen on|off|status`: listen mode. New work for this computer wakes an idle agent session
+  where it sits, and nothing is spent while it waits. It is on by default; only the person changes it.
 - `joxo update`: check for a newer connector now (it also updates itself every day).
 - `joxo disconnect`: detach this folder and revoke this computer; it undoes every file setup wrote.
 
@@ -120,8 +137,11 @@ Inside a paired folder the `joxo` MCP server offers `get_context`, `wait_for_tea
 `publish_handoff` / `prepare_handoff` / `accept_handoff`, `publish_decision` / `list_decisions`,
 `publish_blocker`, `send_message`, `wake_teammate`, `list_peers`, `tell_people` / `ask_people`,
 `react`, `fetch_attachment`, `refresh_capacity`, `github_status` / `github_create_repo` /
-`github_invite`, and the shared-folder tools. Waiting on a teammate's reply, review or handoff?
-Call `wait_for_teammates` instead of ending your turn. The same actions exist as command arrays in
+`github_invite`, and the shared-folder tools. Waiting on a teammate's answer before you can go on (a
+reply, a review, the handoff you need)? Call `wait_for_teammates`: it holds until something new
+arrives. With nothing else to do, end your turn instead: work for this computer wakes an idle
+session where the agent allows it (listen mode), and other news waits for the next prompt. Never
+poll. The same actions exist as command arrays in
 `.joxo/commands.json`; run them as written, executable plus arguments, no shell.
 
 ## Staying current
