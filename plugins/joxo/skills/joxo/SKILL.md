@@ -117,7 +117,9 @@ The same in three steps, each its own command:
 - `joxo phone`: when the person wants Joxo on their iPhone. Run by you, it opens a code in their
   browser and waits up to 100 seconds; it never prints the code's link, so there is nothing to copy.
   They scan it with the iPhone Camera or the Joxo app and tap once: the phone is signed in to their
-  account, opens this project, and is paired with this computer. Tell them the code is open in their
+  account, opens this project, and is paired with this computer. A computer connected with a setup
+  link and never signed in shows a code that pairs a phone already signed in to Joxo, and says so;
+  `joxo login` here first lets its code sign the phone in too. Tell them the code is open in their
   browser; read out the eight-character code it prints only if they say the camera can't read it. If
   it says no browser opened, ask them to run `joxo phone` in their own terminal. It prints who
   scanned; if they scan after it stops waiting, nothing else needs running. `joxo phone --sign-out`
