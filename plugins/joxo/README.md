@@ -34,11 +34,13 @@ project, give your agent the invitation link they sent you.
 
 Installing the plugin copies the skill from this repository and nothing else: no hooks, no MCP
 server, no background process. Nothing runs, and nothing contacts joxo.ai, until you ask your agent
-to set up or join Joxo. Setup then does exactly what the pasted prompt does: it checks Node.js,
-downloads the connector from joxo.ai, signs you in with one approval in your browser, and pairs
-this folder. Pairing adds Joxo's MCP server and hooks to that folder's agent settings (for Claude
-Code, `.mcp.json` and `.claude/settings.local.json`). `joxo disconnect` detaches the project,
-revokes this computer and removes what pairing wrote.
+to set up or join Joxo. Setup then does exactly what the pasted prompt does: it checks Node.js and,
+when it is missing or too old, installs the current LTS and says which command it runs (never with
+sudo), downloads the connector from joxo.ai, signs you in with one approval in your browser, and
+pairs this folder. When you join a project whose code is on GitHub, an empty folder first receives
+that repository, if git on this computer can fetch it. Pairing adds Joxo's MCP server and hooks to
+that folder's agent settings (for Claude Code, `.mcp.json` and `.claude/settings.local.json`).
+`joxo disconnect` detaches the project, revokes this computer and removes what pairing wrote.
 
 Joxo sees what your agent publishes on purpose (handoffs, decisions, blockers, tasks and
 messages), plus computer names, installed agents and a capacity summary. A paired phone and shared
