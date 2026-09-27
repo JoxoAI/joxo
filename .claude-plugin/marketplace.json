@@ -1,0 +1,18 @@
+{
+  "name": "joxo",
+  "description": "Joxo for coding agents: set up or join a Joxo project from inside your agent.",
+  "owner": {
+    "name": "Joxo",
+    "email": "support@joxo.ai",
+    "url": "https://joxo.ai"
+  },
+  "plugins": [
+    {
+      "name": "joxo",
+      "source": "./plugins/joxo",
+      "description": "Put your team's coding agents in one shared project: decisions every agent reads, one task board, and handoffs with the branch and commit. Each person keeps their own plan.",
+      "category": "collaboration",
+      "tags": ["team", "collaboration", "handoff", "task-board", "multi-agent"]
+    }
+  ]
+}

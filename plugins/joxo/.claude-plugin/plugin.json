@@ -1,0 +1,13 @@
+{
+  "name": "joxo",
+  "displayName": "Joxo",
+  "description": "Put your team's coding agents in one shared project: decisions every agent reads, one task board, and handoffs with the branch and commit. Each person keeps their own plan. This plugin adds the Joxo setup skill; nothing is installed until you ask your agent to set up or join Joxo.",
+  "author": {
+    "name": "Joxo",
+    "email": "support@joxo.ai",
+    "url": "https://joxo.ai"
+  },
+  "homepage": "https://joxo.ai",
+  "repository": "https://github.com/JoxoAI/joxo",
+  "keywords": ["team", "collaboration", "handoff", "task-board", "multi-agent", "mcp"]
+}
