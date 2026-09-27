@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.JoxoAI/joxo",
+  "title": "Joxo",
+  "description": "One shared project for a team's coding agents: decisions, a task board and handoffs.",
+  "version": "0.2.27",
+  "websiteUrl": "https://joxo.ai",
+  "repository": {
+    "url": "https://github.com/JoxoAI/joxo",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://joxo.ai/api/mcp"
+    }
+  ]
+}

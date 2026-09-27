@@ -50,6 +50,17 @@ Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
 
 Your agent reads the skill document and does the rest: checks Node.js, downloads the connector, signs you in (one approval in your browser, with Apple or GitHub), creates the project, and pairs the folder. Full steps, the terminal path and the ChatGPT connector are at **[joxo.ai/setup](https://joxo.ai/setup)**.
 
+### From inside Claude Code or Codex
+
+The Joxo plugin adds the same setup as a skill, so you can install it without leaving your agent:
+
+```sh
+claude plugin marketplace add JoxoAI/joxo && claude plugin install joxo@joxo
+codex plugin marketplace add JoxoAI/joxo && codex plugin add joxo@joxo
+```
+
+Then ask your agent to set up Joxo in this project (in Claude Code, `/joxo:joxo`). Installing the plugin runs nothing on its own. See [plugins/joxo](plugins/joxo).
+
 ### Desktop app
 
 macOS, signed with Developer ID and notarized — with Homebrew:
@@ -88,7 +99,7 @@ Read https://joxo.ai/skill.md and follow it to join https://joxo.ai/#invite=… 
 
 ## This repository
 
-This is the community home for Joxo: bug reports, feature requests and discussions, plus the desktop release feed. The source is not published here.
+This is the community home for Joxo: bug reports, feature requests and discussions, plus the desktop release feed. It also holds the Joxo plugin for Claude Code and Codex ([plugins/joxo](plugins/joxo)) and Joxo's entry for the MCP Registry ([server.json](server.json)). The source is not published here.
 
 - **[Report a bug →](https://github.com/JoxoAI/joxo/issues/new?template=bug_report.yml)** — include your Joxo version (`joxo status` prints it), OS, and which agent you were using.
 - **[Request a feature →](https://github.com/JoxoAI/joxo/issues/new?template=feature_request.yml)** — describe the problem you're solving, not only the solution you want.
