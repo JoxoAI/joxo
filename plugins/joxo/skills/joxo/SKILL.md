@@ -52,11 +52,15 @@ exit status says the rest:
 
 - **0**: connected. Your hooks work in this session already; Joxo's tools load in your next one,
   and until then you use the `joxo` command.
-- **75**: still waiting for the approval in the browser. Run `joxo connect --continue` in the same
-  folder right away; it picks up where it stopped and opens nothing new.
+- **75**: still waiting for the approval in the browser. Run the command its last lines name
+  (`joxo connect --continue`) in the same folder right away; it picks up where it stopped and opens
+  nothing new.
 - **64**: it needs one answer from the person (which folder, which of their projects). The output
   names the question and the command to run with the answer.
 - anything else: show the person the error; it names the fix.
+
+On macOS and Linux `joxo` is `~/.local/bin/joxo`, and setup adds nothing to your shell's PATH:
+when that folder is not on it, the output spells the command that way. Run it as written.
 
 Every run returns within two minutes, so never wrap it in `timeout` or run it in the background.
 If your sandbox blocks the network (Codex's default one does, and it blocks opening a browser too),
