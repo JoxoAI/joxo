@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "joxo": {
+      "command": "joxo",
+      "args": [
+        "mcp",
+        "--if-paired",
+        "--channel-only"
+      ]
+    }
+  }
+}
