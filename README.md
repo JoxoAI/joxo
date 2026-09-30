@@ -48,7 +48,7 @@ Paste one line into your coding agent, in the project folder — Claude Code, Co
 Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
 ```
 
-Your agent reads the skill document and does the rest: checks Node.js, downloads the connector, signs you in (one approval in your browser, with Apple or GitHub), creates the project, and pairs the folder. Full steps, the terminal path and the ChatGPT connector are at **[joxo.ai/setup](https://joxo.ai/setup)**.
+Your agent reads the skill document and does the rest: checks Node.js, downloads the connector, signs you in (one approval in your browser, with Apple or GitHub), creates the project, and pairs the folder. Then it asks how you want to link your iPhone and offers the code now: `joxo phone` opens it in your browser, and one scan with the Joxo app signs the phone in and pairs it with that computer. Nobody signs up or starts a project on the phone; the app's first screen is the same one line, for your agent. Full steps, the terminal path and the ChatGPT connector are at **[joxo.ai/setup](https://joxo.ai/setup)**.
 
 ### From inside Claude Code or Codex
 

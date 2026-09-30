@@ -41,7 +41,7 @@ invitation (`https://joxo.ai/i/…`), or nothing at all when they are starting f
 
 No invitation, but this folder is a clone of the project's GitHub repository? Put `--request`
 where the link goes: it asks the project's owner and connects once they approve (exit 75 until
-then). Started on the phone? Open https://joxo.ai/go here and scan it with the Joxo app.
+then).
 
 A person at a terminal, with no agent, runs the same setup for the folder they are in:
 `curl -fsSL https://joxo.ai/install | sh` (in PowerShell: `irm https://joxo.ai/install.ps1 | iex`). It ends in
@@ -76,7 +76,8 @@ Tell the person what that block says, in two sentences; its last line says what 
 exit status says the rest:
 
 - **0**: connected. Your hooks work in this session already; Joxo's tools load in your next one,
-  and until then you use the `joxo` command.
+  and until then you use the `joxo` command. Then ask how they want to link their iPhone and
+  offer its code now; told yes, or unable to ask, run `joxo phone`. Nobody signs up on the phone.
 - **75**: still waiting: for the approval in the browser, or for the owner's answer to a request.
   Run the command its last lines name (`joxo connect --continue`, or `joxo connect --request`) in
   the same folder right away; it picks up where it stopped and opens or asks nothing new.
@@ -138,9 +139,9 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
   folder's committed code; `joxo contribute <link>` brings it into one; `joxo source status|withdraw`.
   Each prints what it leaves out and opens a page where the person approves; exit 75: run it again.
 - `joxo phone`: the person's iPhone. Run by you, it opens a code in their browser and waits up
-  to 100 seconds; one Camera scan and one tap sign the phone in, open this project and
-  pair it with this computer. A computer connected with a setup link was never
-  signed in, so it first opens the approval page for one click (which signs that browser in too).
+  to 100 seconds; one scan and one tap sign the phone in and pair it with this computer. A computer
+  connected with a setup link was never signed in, so it first opens the approval page for one
+  click (which signs that browser in too).
   Read out the eight-character code it prints only if the camera fails; with no browser, ask them
   to run `joxo phone` in their own terminal. `--sign-out` signs that phone out.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>

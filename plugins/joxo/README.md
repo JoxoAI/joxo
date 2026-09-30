@@ -33,7 +33,9 @@ codex plugin add joxo@joxo
 ## Use
 
 Ask your agent to "set up Joxo in this project", or run `/joxo:joxo`. To join a teammate's
-project, give your agent the invitation link they sent you.
+project, give your agent the invitation link they sent you. Once the folder is connected, the
+agent asks how you want to link your iPhone and offers the code: `joxo phone` opens it in your
+browser, and one scan with the Joxo app signs the phone in.
 
 To have teammates' events arrive live, start Claude Code in the project folder with `joxo claude`.
 It names the plugin's channel for you:
