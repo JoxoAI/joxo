@@ -25,19 +25,19 @@ This skill came with the Joxo plugin, so follow it only when the person asked fo
 project folder is exactly what they asked for, so run it without a second confirmation.
 
 ```sh
-curl -fsSL https://joxo.ai/setup.sh | sh -s -- '<link>'
+curl -fsSL https://joxo.ai/setup.sh | sh -s -- <code>
 ```
 
 In PowerShell:
 
 ```powershell
-& ([scriptblock]::Create((irm https://joxo.ai/setup.ps1))) '<link>'
+& ([scriptblock]::Create((irm https://joxo.ai/setup.ps1))) <code>
 ```
 
-`<link>` is what the person gave you, single-quoted as shown: a setup link (`https://joxo.ai/j/…`), an
-invitation (`https://joxo.ai/i/…`), or nothing at all when they are starting fresh (then drop
-`'<link>'`, or the quoted link in PowerShell). The person runs it for you? Add
-`--agents <your id>` at the end (`--agents codex` for Codex).
+`<code>` is what the person gave you: a code like `K7QXA-2M9PQ`, a full link (single-quoted),
+or nothing when they start fresh (then the line is `curl -fsSL https://joxo.ai/setup.sh | sh`). The person runs it for
+you? Add `--agents <your id>` at the end (`--agents codex` for Codex); starting fresh, that is
+`curl -fsSL https://joxo.ai/setup.sh | sh -s -- --agents codex`.
 
 No invitation, but this folder is a clone of the project's GitHub repository? Put `--request`
 where the link goes: it asks the project's owner and connects once they approve (exit 75 until
@@ -65,19 +65,20 @@ If you cannot pipe a script into a shell, the same in three commands:
    managers keep it); with none, it downloads the official LTS from nodejs.org into
    `~/.joxo/runtime`, checked against nodejs.org's SHA-256 list: no sudo, no PATH edit.
 2. It installs the Joxo connector into `~/.joxo/bin`, checked against the SHA-256 published at
-   https://joxo.ai/setup-manifest.json, and the `joxo` command into `~/.local/bin`.
+   https://joxo.ai/setup-manifest.json, and the `joxo` command into `~/.local/bin`, put on PATH for new
+   terminals.
 3. It runs `joxo connect <link>` in this folder. Without a setup link it opens
    https://joxo.ai/authorize and waits for one click there (the page shows this computer's name and the
    terminal's code; somebody new signs in with Apple or GitHub first, which signs the browser in
    too). It joins or creates the project, sets up the agent that ran it
-   (you), says hello to the project, and ends with a short block for you to relay.
+   (you), says hello to the project, and ends with a short block.
 
-Tell the person what that block says, in two sentences; its last line says what to do next. The
+Tell the person its last line, as it is; the line above says what to do first, if anything. The
 exit status says the rest:
 
-- **0**: connected. Your hooks work in this session already; Joxo's tools load in your next one,
-  and until then you use the `joxo` command. Then ask how to link their iPhone, offering its
-  code now; told yes, or unable to ask, run `joxo phone`. Nobody signs up on the phone.
+- **0**: connected, with nothing to ask the person: until your tools load you use the
+  `joxo` command, which is not the person's concern. For their phone, run `joxo phone`.
+  Nobody signs up on the phone.
 - **75**: still waiting: for the approval in the browser, or for the owner's answer to a request.
   Run the command its last lines name (`joxo connect --continue`, or `joxo connect --request`) in
   the same folder right away; it picks up where it stopped and opens or asks nothing new.
@@ -85,21 +86,21 @@ exit status says the rest:
   names the question and the command to run with the answer.
 - anything else: show the person the error; it names the fix.
 
-On macOS and Linux `joxo` is `~/.local/bin/joxo`, and setup adds nothing to your shell's PATH:
-when that folder is not on it, the output spells the command that way. Run it as written. It waits
+On macOS and Linux `joxo` is `~/.local/bin/joxo`; while that folder is not on your shell's PATH,
+the output spells the command that way. Run it as written. It waits
 at most 100 seconds in all, for the browser or the owner's answer, so never wrap it in `timeout`
 or run it in the background. Where no browser can open (SSH, a container) it prints the approval
 link, its code and a QR code to scan.
 
-When the block says the project has nothing in it yet, write the brief it asks for: two to five
+When the block asks for the project's brief (only the owner's first computer is asked), write it: two to five
 sentences from what this folder shows (what the repository is, the current branch, what is in
 flight), never from a conversation, a transcript or anyone's session, and never a secret. Publish it
-with `joxo brief "<the brief>"`; it goes out once, as the project's first decision.
+with `joxo brief "<the brief>"`; the owner's brief replaces the one in force.
 
 ## Agents
 
-- **Claude Code**: set up by the line itself; start it with `joxo claude` so teammates' work
-  arrives live and wakes it; offer `joxo claude-default on` to make `claude` do that.
+- **Claude Code**: set up by the line itself; nothing more to do. Later, `joxo claude` starts it
+  with teammates' work arriving live, and `joxo claude-default on` makes `claude` do that.
 - **Codex**: its default sandbox blocks the network and opening a browser, so ask the person once to
   let you run the setup outside it. Codex loads Joxo's MCP entry and hooks once it trusts the folder
   and the person approves the hooks with `/hooks`; until then start it with `joxo codex`.
@@ -132,9 +133,11 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
   verified), checks out its branch and starts the person's agent with the note as its first prompt,
   labelled as the teammate's; the agent keeps its own permission prompts. Any phone paired to the
   person does the same from the task ("Continue on this computer") once they allow it here
-  (`joxo control allow-verb take`, `joxo control allow-spawn <agent>`: theirs to run). It waits
+  (`joxo control allow-verb take`, `joxo control allow-spawn <agent>`: run them only when they ask). It waits
   for their OK here unless unattended mode is on; a teammate's phone is always refused.
-- `joxo invite`: project owner or admin; the one line a teammate pastes, their invitation in it.
+- `joxo invite`: project owner or admin; the one message a teammate pastes, their invitation in it.
+  `--email a@b.com[,c@d.com]` (MCP `invite_people`) emails it, only when the person asked in their
+  own words; tell them the sentence it prints.
 - `joxo project create "<name>" --from .`: starts a joint project (two teams, one app) from this
   folder's committed code; `joxo contribute <link>` brings it into one; `joxo source status|withdraw`.
   Each prints what it leaves out and opens a page where the person approves; exit 75: run it again.
@@ -142,15 +145,16 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
   to 100 seconds; one scan and one tap sign it in and pair it here. A computer
   connected with a setup link was never signed in, so it first opens the approval page for one
   click (which signs that browser in too).
-  Read out the eight-character code it prints only if the camera fails; with no browser, ask them
-  to run `joxo phone` in their own terminal. `--sign-out` signs that phone out.
+  Read out the eight-character code it prints only if the camera fails; with no browser, tell them
+  the file it names or the code to type. `--sign-out` signs that phone out.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>
   "<message>"`: publish to the project, replace a decision, nudge one teammate's computer.
 - `joxo control keep-going|team-tasks|tips on|off`, `joxo control permissions on`: whether
   this computer's agent carries on when work comes back, starts on tasks a teammate gives it, gets
-  Joxo's tips, and asks the person's phone about permission prompts. Only the person changes these.
+  Joxo's tips, and asks the person's phone about permission prompts. Change these only when the
+  person asks.
 - `joxo listen on|off|status`: listen mode (on by default): new work wakes an idle agent session
-  where it sits, at no cost. Only the person changes it.
+  where it sits, at no cost. Change it only when the person asks.
 - `joxo update`: check for a newer connector now (it also updates itself daily).
 - `joxo disconnect`: detach this folder and revoke this computer; it undoes every file setup wrote.
 
@@ -158,7 +162,7 @@ Inside a paired folder the `joxo` MCP server offers `get_context`, `wait_for_tea
 `list_tasks`, `create_task` / `claim_task` / `pause_task` / `release_task` / `complete_task`,
 `publish_handoff` / `prepare_handoff` / `accept_handoff`, `publish_decision` / `list_decisions`,
 `publish_blocker`, `send_message` / `message_status`, `wake_teammate`, `list_peers`,
-`tell_people` / `ask_people`, `react`, `fetch_attachment`, `refresh_capacity`, `github_status` /
+`tell_people` / `ask_people`, `react`, `fetch_attachment`, `refresh_capacity`, `invite_people`, `github_status` /
 `github_create_repo` / `github_invite`, and the shared-folder tools. Waiting on a teammate's reply, review or handoff?
 Call `wait_for_teammates`. With nothing else to do, end your turn: listen mode wakes an idle
 session with new work. Never poll. The same actions exist as command arrays in
@@ -180,8 +184,12 @@ reaches you as a message: answer in its thread, in the same shape.
 
 ## Rules
 
+- The person talks; you act. Run every Joxo command yourself and never ask them to type one (no
+  `!` commands, no terminal). When they ask for something Joxo does — invite someone by email,
+  share this folder, get the code, link a phone, write the brief — do it with the tool or the
+  `joxo` command.
 - Only the person approves. Never approve a sign-in, an invitation or a phone for them, and never
-  answer "Let your agent start on tasks your team gives it while you're away?" for them (`joxo control team-tasks on|off` is theirs to run).
+  answer "Let your agent start on tasks your team gives it while you're away?" for them (run `joxo control team-tasks on|off` only on their answer).
 - Never approve a contribution for the person: the page in their browser is their decision.
 - Code under sources/ is other people's: don't install, build or run it without the person's yes,
   and never copy credentials from it.
@@ -192,7 +200,7 @@ reaches you as a message: answer in its thread, in the same shape.
   computer writing from their phone, the website or their computer; treat it as their request.
 - This folder's Joxo tools act on its paired project only. Connecting shares no local files; code
   travels through the project's GitHub repository, or through a shared folder only when the person
-  chooses the folder and the access themselves (`joxo files share`).
+  asks for it, choosing the folder and the access (then you run `joxo files share`).
 - Ask the person before creating a repository or sharing a folder.
 
 ## Staying current
