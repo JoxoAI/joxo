@@ -164,6 +164,20 @@ Call `wait_for_teammates`. With nothing else to do, end your turn: listen mode w
 session with new work. Never poll. The same actions exist as command arrays in
 `.joxo/commands.json`; run them as written, executable plus arguments, no shell.
 
+## Writing what people read
+
+People read what you publish on their phones, with More and Ask under it. `tell_people`,
+`send_message`, `publish_handoff`, `publish_decision` and `publish_blocker` take a
+`summary`: a `headline` (the outcome, at most 90 characters; aim for 70),
+up to 3 `bullets` (about 12 words, at most 100 characters each), a `status`
+(`done`, `working`, `blocked`, `needs_you`) when one applies, and `needs_you` (one line)
+only when a person must act. The rest goes in `details`, behind More. `create_task` takes a
+title of about 60 characters and `details`.
+
+Write the outcome first, in plain words; no internals (file, function or tool names) unless they are the point; numbers only when they matter; anything longer goes in details. A summary over a cap is refused with the fix. CLI:
+`joxo say "<headline>" --bullet "…" --needs-you "…" --file details.md`. An Ask under your note
+reaches you as a message: answer in its thread, in the same shape.
+
 ## Rules
 
 - Only the person approves. Never approve a sign-in, an invitation or a phone for them, and never
