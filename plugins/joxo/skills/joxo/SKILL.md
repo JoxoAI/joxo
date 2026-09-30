@@ -76,8 +76,8 @@ Tell the person what that block says, in two sentences; its last line says what 
 exit status says the rest:
 
 - **0**: connected. Your hooks work in this session already; Joxo's tools load in your next one,
-  and until then you use the `joxo` command. Then ask how they want to link their iPhone and
-  offer its code now; told yes, or unable to ask, run `joxo phone`. Nobody signs up on the phone.
+  and until then you use the `joxo` command. Then ask how to link their iPhone, offering its
+  code now; told yes, or unable to ask, run `joxo phone`. Nobody signs up on the phone.
 - **75**: still waiting: for the approval in the browser, or for the owner's answer to a request.
   Run the command its last lines name (`joxo connect --continue`, or `joxo connect --request`) in
   the same folder right away; it picks up where it stopped and opens or asks nothing new.
@@ -98,8 +98,8 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
 
 ## Agents
 
-- **Claude Code**: set up by the line itself; `joxo claude` starts it with teammates' events
-  arriving live.
+- **Claude Code**: set up by the line itself; start it with `joxo claude` so teammates' work
+  arrives live and wakes it; offer `joxo claude-default on` to make `claude` do that.
 - **Codex**: its default sandbox blocks the network and opening a browser, so ask the person once to
   let you run the setup outside it. Codex loads Joxo's MCP entry and hooks once it trusts the folder
   and the person approves the hooks with `/hooks`; until then start it with `joxo codex`.
@@ -139,7 +139,7 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
   folder's committed code; `joxo contribute <link>` brings it into one; `joxo source status|withdraw`.
   Each prints what it leaves out and opens a page where the person approves; exit 75: run it again.
 - `joxo phone`: the person's iPhone. Run by you, it opens a code in their browser and waits up
-  to 100 seconds; one scan and one tap sign the phone in and pair it with this computer. A computer
+  to 100 seconds; one scan and one tap sign it in and pair it here. A computer
   connected with a setup link was never signed in, so it first opens the approval page for one
   click (which signs that browser in too).
   Read out the eight-character code it prints only if the camera fails; with no browser, ask them

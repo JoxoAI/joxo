@@ -59,7 +59,7 @@ claude plugin marketplace add JoxoAI/joxo && claude plugin install joxo@joxo
 codex plugin marketplace add JoxoAI/joxo && codex plugin add joxo@joxo
 ```
 
-Then ask your agent to set up Joxo in this project (in Claude Code, `/joxo:joxo`). Installing the plugin runs nothing on its own. Once Joxo is set up, the plugin also carries Joxo's live channel for Claude Code: start it with `joxo claude` and teammates' events reach your session as they happen. See [plugins/joxo](plugins/joxo).
+Then ask your agent to set up Joxo in this project (in Claude Code, `/joxo:joxo`). Installing the plugin runs nothing on its own. Once Joxo is set up, the plugin also carries Joxo's live channel for Claude Code: start it with `joxo claude` and teammates' messages and tasks reach your session as they happen, and an idle session wakes when work arrives (`joxo claude-default on` makes `claude` start that way in Joxo folders). See [plugins/joxo](plugins/joxo).
 
 ### Desktop app
 
