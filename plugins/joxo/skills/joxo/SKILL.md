@@ -146,9 +146,9 @@ with `joxo brief "<the brief>"`; it goes out once, as the project's first decisi
   to run `joxo phone` in their own terminal. `--sign-out` signs that phone out.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>
   "<message>"`: publish to the project, replace a decision, nudge one teammate's computer.
-- `joxo control keep-going on|off`, `joxo control team-tasks on|off`, `joxo control permissions
-  on`: whether this computer's agent carries on when work comes back, starts on tasks a teammate
-  gives it, and asks the person's phone about permission prompts. Only the person changes these.
+- `joxo control keep-going|team-tasks|tips on|off`, `joxo control permissions on`: whether
+  this computer's agent carries on when work comes back, starts on tasks a teammate gives it, gets
+  Joxo's tips, and asks the person's phone about permission prompts. Only the person changes these.
 - `joxo listen on|off|status`: listen mode (on by default): new work wakes an idle agent session
   where it sits, at no cost. Only the person changes it.
 - `joxo update`: check for a newer connector now (it also updates itself daily).
