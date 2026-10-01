@@ -79,4 +79,10 @@ Joxo never reads your prompts, your transcripts or your provider credentials, an
   <a href="https://www.instagram.com/joxo.ai">Instagram</a>
 </p>
 
+<div align="center">
+
+[![SPONSORED BY E2B FOR STARTUPS](https://img.shields.io/badge/SPONSORED%20BY-E2B%20FOR%20STARTUPS-ff3001?style=for-the-badge&labelColor=black)](https://e2b.dev/startups)
+
+</div>
+
 <p align="center"><sub>© 2026 Joxo, Inc., a Delaware corporation. Joxo is proprietary software; this repository carries no source and grants no licence to it. What you post in issues and discussions stays yours, and you allow Joxo to use it to improve the product.</sub></p>
