@@ -212,6 +212,6 @@ is updated by the app. Never reinstall over a working connector to update it.
 
 ## Copyright
 
-© Joxo. This document may be read and followed by a person's own coding agent to set Joxo up for
+© Joxo, Inc. This document may be read and followed by a person's own coding agent to set Joxo up for
 that person. It is not licensed for training, redistribution, or reproduction outside that use.
 Terms: https://joxo.ai/terms
