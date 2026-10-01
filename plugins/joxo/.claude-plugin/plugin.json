@@ -1,7 +1,7 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "0.2.39",
+  "version": "0.2.40",
   "description": "Joxo's setup skill and live channel for Claude Code, which runs the joxo command you already installed so teammates' messages and handoffs reach your session as they happen.",
   "author": {
     "name": "Joxo",
