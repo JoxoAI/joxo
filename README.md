@@ -39,7 +39,7 @@ Teammates join the same way. Invite them from your project, and their line carri
 - **Answer from your phone.** When an agent needs a decision or a permission, you tap it on your iPhone.
 
 <p align="center">
-  <img src="media/app.jpg" alt="The Joxo iPhone app: every agent on one page, a handoff, an agent asking a question, and the team chat">
+  <img src="media/app.jpg" alt="The Joxo iPhone app: the task board, a handoff, an agent asking a question, and the team chat">
 </p>
 
 ## Other ways in
