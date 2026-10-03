@@ -33,7 +33,7 @@ let reading: Reading | null = null
 let failures = 0
 let lastLookAt = 0
 let lastActivityAt = 0
-let isLooking = false
+let inFlight: Promise<void> | null = null
 let hiddenAt: string | null = null
 let folder: string | null = null
 let toastLog: number[] = []
@@ -54,10 +54,20 @@ function afterFailure(previous: Reading | null, reason: string): Reading {
   return { kind: 'error', reason }
 }
 
+/**
+ * One read of the project at a time. A caller that arrives while one is running gets that one's
+ * promise, so `/team` waits for the read the session start began instead of answering from nothing
+ * ("nothing read yet") when the machine is busy and that first read is still going.
+ */
+function look($: EngineInterface): Promise<void> {
+  if (inFlight !== null) return inFlight
+  const running = lookOnce($).finally(() => { if (inFlight === running) inFlight = null })
+  inFlight = running
+  return running
+}
+
 /** One read of the project, then the toasts, the status entry and the next look. */
-async function look($: EngineInterface): Promise<void> {
-  if (isLooking) return
-  isLooking = true
+async function lookOnce($: EngineInterface): Promise<void> {
   let isDormant = false
   try {
     const cwd = await $.session.cwd()
@@ -99,7 +109,6 @@ async function look($: EngineInterface): Promise<void> {
     $.ui.status(isDormant ? undefined : statusText(reading))
     $.ui.invalidate('ui.render')
   } finally {
-    isLooking = false
     timer?.cancel()
     timer = $.clock.after(nextDelayMs({ now: await $.clock.now(), lastActivityAt, failures, isDormant }), () => { void look($) })
   }
