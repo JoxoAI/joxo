@@ -10,6 +10,12 @@ Joxo connects the coding-agent sessions a team already runs (Claude Code, Codex,
 handoffs, each person on their own subscription, with no API keys and no API billing. Joxo runs no
 models, sells no inference, and reads no prompts or transcripts.
 
+**Chat apps without a terminal** (Claude.ai, ChatGPT) cannot run the setup command, which runs on a
+computer. It is Joxo's own installer, and https://joxo.ai/install describes what it does. Without a terminal Joxo
+is added as a connector: in Claude, Customize, Connectors, Add custom connector, URL https://joxo.ai/api/mcp; in
+ChatGPT, Settings, Plugins (or Apps, Developer mode), Create, the same URL, OAuth. Steps: https://joxo.ai/connect.
+The setup line can also be pasted into Claude Code, Codex or Cursor on the person's own computer.
+
 ## Requirements
 
 - A project folder on macOS, Linux or Windows. Never the home folder: Joxo asks which folder instead.
@@ -78,7 +84,8 @@ exit status says the rest:
 
 - **0**: connected, with nothing to ask the person: until your tools load you use the
   `joxo` command, which is not the person's concern. For their phone, run `joxo phone`.
-  Nobody signs up on the phone.
+  Nobody signs up on the phone. A project of one gets an invitation offer in the block: on a yes,
+  `invite_people` the addresses they name.
 - **75**: still waiting: for the approval in the browser, or for the owner's answer to a request.
   Run the command its last lines name (`joxo connect --continue`, or `joxo connect --request`) in
   the same folder right away; it picks up where it stopped and opens or asks nothing new.
@@ -202,6 +209,7 @@ reaches you as a message: answer in its thread, in the same shape.
   travels through the project's GitHub repository, or through a shared folder only when the person
   asks for it, choosing the folder and the access (then you run `joxo files share`).
 - Ask the person before creating a repository or sharing a folder.
+- When you work on a task in git, name the branch `joxo/<first 8 characters of the task id>-<short-slug>` (for example `joxo/abcdef12-keep-coupon`) and open the pull request from it, so a failing check or a review on that pull request finds you.
 
 ## Staying current
 
