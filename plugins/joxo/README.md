@@ -4,12 +4,15 @@
 same decisions, the team works from one task board, and handoffs carry the branch and commit. Each
 person keeps their own plan.
 
-This plugin adds two things:
+This plugin adds three things:
 
 - the `joxo` skill, the same document your agent reads when you paste
   "Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.";
 - Joxo's live channel for Claude Code: teammates' messages, handoffs, decisions and blockers for
-  your computer arrive in your open session as they happen, even while it sits idle.
+  your computer arrive in your open session as they happen, even while it sits idle;
+- a live view of your team, a Claude Code mod: a quiet line above the prompt, a `/team` pane and
+  toasts. Claude Code 2.1.287 or later; older versions load the plugin and ignore it. See
+  [The live view](#the-live-view-a-claude-code-mod).
 
 ## Install
 
@@ -56,15 +59,105 @@ claude --channels plugin:joxo@joxo
 
 The settings to add are at [joxo.ai/security](https://joxo.ai/security).
 
+## The live view (a Claude Code mod)
+
+Claude Code 2.1.287 added mods: plugins that draw inside Claude Code. This plugin's mod shows your
+team where you already look, and only inside a folder that is paired with a Joxo project. Anywhere
+else it draws nothing.
+
+- **A quiet line above the prompt**, only when there is something to say:
+  `Joxo Launch · ● Hussain working · ● Sara waiting · 2 tasks claimed · 1 for you`. A green dot is a
+  teammate whose agent is working, an amber dot is an agent waiting on a person. `Hide` puts it away
+  until something changes.
+- **`/team`**, or the `Open` button, opens a pane: each teammate with their computers and agent
+  sessions (working, waiting, idle) and what they are on; the board with who holds each task and a
+  `Take` button that claims it for you; the latest messages, decisions and handoffs; the usage left
+  on this computer's Claude accounts; how to invite someone; and `Open on web`.
+- **Toasts** when a message or handoff for your team arrives, once each, and none during your quiet
+  hours.
+- **A small status entry**, `Joxo ● 3`: how many teammates are on, and how many things are new.
+
+It draws in the terminal and in the Code tab of the Claude desktop app (avatars and status dots
+there, glyphs in the terminal). Where nothing draws (the VS Code panel, `claude -p`), `/team` prints
+the same picture as text.
+
+### What the mod can and cannot do
+
+A mod is code that runs inside Claude Code with your permissions. It is not sandboxed. Claude's own
+documentation says so, and says a mod can read your API keys. This one is built to be small enough to
+check, and to need none of that:
+
+- It runs three commands, with no shell, and never looks `joxo` up by name (a repository could put
+  another program of that name first in your PATH): `joxo pulse --json` (a read), `joxo task claim <id>`
+  (only when you press **Take**) and `joxo open` (only when you press **Open on web**). `joxo setup`
+  records the absolute paths of node and of `joxo.mjs` in this plugin's two options (`nodePath`,
+  `joxoPath`, plain paths, nothing secret). The mod runs `[nodePath, joxoPath, …]` from the folder
+  `joxo.mjs` is in and names your project with `--dir`. Until those options are set it runs nothing, and
+  the pane tells you to run `joxo setup`. Everything it shows comes from `joxo pulse`.
+- `joxo pulse` acknowledges nothing, so looking never uses up a message your agent has not read yet. It
+  refreshes the roster the way `joxo sync` does, so like `joxo sync` it records what arrived in the
+  project's `.joxo` state and `JOXO_CONTEXT.md` (only when they changed), and it may send what was
+  already queued on this computer (a pending acknowledgment or outbox item) along with that refresh.
+  Sessions share one refresh: a look within 25 seconds of the last one makes no relay call at all.
+- When you press **Copy invite command** it puts one fixed line, `joxo invite --email `, on your
+  clipboard. That is the only thing it ever copies.
+- The mod itself never reads credentials, tokens, the keychain, environment variables or settings, and
+  it calls no network API: only the `joxo` command talks to Joxo. The mod itself reads no files and
+  writes none except its own small store (the ids of messages it already toasted). The `joxo pulse`
+  command it runs does write the state files described above.
+- Nothing a teammate writes is run, followed or added to your prompt. Names, task titles and messages
+  are drawn as plain text: control characters, hidden tag characters, text-direction overrides and
+  invisible fillers are removed and look-alike forms are folded to plain ones. A sender's name is drawn
+  alone in one fixed style, and one that could pass for Joxo or Claude is marked as a teammate's. The mod
+  never touches the prompt, the system prompt, the conversation or a tool call.
+- It looks about every 30 seconds while you work, every few minutes when you are idle, backs off when
+  Joxo is unreachable, and in a folder where Joxo is not set up (or `joxo` is not installed) it looks
+  twice an hour and shows nothing, not even a status entry. Toasts are limited to three in five minutes
+  and one per sender.
+
+You do not have to trust this description. In a checkout of this plugin, run:
+
+```sh
+claude plugin validate .
+```
+
+and read the `calls:` line. It lists every call the mod makes to Claude Code, and it is short:
+
+```text
+$.clock.after, $.clock.now, $.command.register, $.process.run, $.session.cwd, $.session.surfaces,
+$.store.get, $.store.set, $.ui.close, $.ui.copy, $.ui.invalidate, $.ui.open, $.ui.resolve,
+$.ui.status, $.ui.toast
+```
+
+There is no `$.fs`, `$.env`, `$.http`, `$.settings`, `$.mcp` or `$.prompt` in it. The tests in
+`tests/` (`claude plugin test .`) check the same things, and a test in Joxo's own repository fails if
+the list ever grows.
+
+To turn the mod off, set `"disableAllHooks": true` in `~/.claude/settings.json`. Claude Code's
+documentation says that stops every installed mod while the plugin stays installed and its skills and MCP
+servers keep loading (so the setup skill and the channel stay). `--safe-mode` also stops mods, but it
+disables your other customizations too, including this plugin's skill and channel, for that session.
+Mods need Claude Code 2.1.287 or later (2.1.286 also loads them; 2.1.285 and earlier only with the early-access
+flag, and ignore them otherwise); Claude Code older than that loads the rest of the plugin and ignores the mod.
+
+The mod shows your usage for each Claude account because Joxo already knows it. It is the same
+figure `joxo status` prints. It is never sent anywhere by the mod.
+
 ## What installing it does
 
-Installing the plugin copies the skill and one MCP server entry from this repository. The entry
-runs `joxo mcp --if-paired --channel-only`: the `joxo` command that Joxo's setup puts on your
-computer. The plugin contains no Joxo program of its own and no hooks.
+Installing the plugin copies the skill, one MCP server entry and one small mod from this
+repository. The entry runs `joxo mcp --if-paired --channel-only` through the `joxo.mjs` that Joxo's
+setup put on your computer, by absolute path: `joxo setup` records the paths of node and of `joxo.mjs`
+in this plugin's two options (`nodePath`, `joxoPath`), and the entry is `${user_config.nodePath}
+${user_config.joxoPath} mcp …`. It is never found through PATH, so a repository's `node_modules/.bin`,
+a `.` in PATH or a direnv cannot put its own `joxo` in the way. Until setup has recorded the paths the
+entry starts nothing (Claude Code lists the server as one that could not start; run `joxo setup`). The plugin contains no Joxo connector of its own. The mod (the files in
+`hooks/`) is about 900 lines of TypeScript that you can read in full, and it is described below.
 
 That entry does something only when Joxo is installed, the folder you opened is paired with a Joxo
 project, and you started Claude Code with Joxo's channel. In every other session it offers no
-tools, adds nothing to what your agent reads, and contacts nobody. Joxo's tools come from the
+tools, adds nothing to what your agent reads, and contacts nobody. (The mod is separate; it is
+described next.) Joxo's tools come from the
 project's own settings, so they are never listed twice. Until Joxo is installed, Claude Code lists
 the entry as a server that could not start; setup fixes that.
 

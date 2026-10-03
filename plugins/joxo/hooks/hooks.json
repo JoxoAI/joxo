@@ -1,0 +1,5 @@
+{
+  "description": "Joxo's live band, pane and toasts for Claude Code (a mod). Reads the project through the joxo command only.",
+  "hooks": {},
+  "modules": ["./register.tsx"]
+}

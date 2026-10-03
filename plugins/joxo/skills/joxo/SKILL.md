@@ -22,7 +22,7 @@ The setup line can also be pasted into Claude Code, Codex or Cursor on the perso
 - Node.js 22.13 or newer. A computer with none gets the official Node.js LTS in `~/.joxo/runtime`, for
   Joxo alone.
 - A coding agent: Claude Code, Codex, Cursor, OpenCode and more.
-- One sign-in with Apple or GitHub, in a browser tab the setup opens. A setup link carries the
+- One sign-in (Apple, GitHub or whatever else this Joxo offers), in a browser tab the setup opens. A setup link carries the
   account, so it needs none.
 
 ## Install
@@ -75,7 +75,7 @@ If you cannot pipe a script into a shell, the same in three commands:
    terminals.
 3. It runs `joxo connect <link>` in this folder. Without a setup link it opens
    https://joxo.ai/authorize and waits for one click there (the page shows this computer's name and the
-   terminal's code; somebody new signs in with Apple or GitHub first, which signs the browser in
+   terminal's code; somebody new signs in first, which signs the browser in
    too). It joins or creates the project, sets up the agent that ran it
    (you), says hello to the project, and ends with a short block.
 
