@@ -1,8 +1,8 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "0.2.43",
-  "description": "Joxo's setup skill and live channel for Claude Code, which runs the joxo command you already installed so teammates' messages and handoffs reach your session as they happen.",
+  "version": "0.2.44",
+  "description": "Joxo for Claude Code: the setup skill, the live channel for teammates' messages and handoffs, and a quiet live view of your team (a mod: band, pane, toasts) that only reads through the joxo command you already installed.",
   "author": {
     "name": "Joxo",
     "email": "support@joxo.ai",
@@ -17,6 +17,21 @@
     "task-board",
     "multi-agent",
     "mcp",
-    "channel"
-  ]
+    "channel",
+    "mod"
+  ],
+  "userConfig": {
+    "nodePath": {
+      "type": "string",
+      "title": "Node.js path",
+      "description": "Absolute path of the node that runs joxo. `joxo setup` fills this in; leave it empty and run joxo setup.",
+      "required": false
+    },
+    "joxoPath": {
+      "type": "string",
+      "title": "joxo path",
+      "description": "Absolute path of joxo.mjs (usually ~/.joxo/bin/joxo.mjs). `joxo setup` fills this in; leave it empty and run joxo setup. The mod never looks joxo up by name.",
+      "required": false
+    }
+  }
 }
