@@ -26,7 +26,9 @@ Paste this into your coding agent. It signs you in and sets up the rest.
 Set up Joxo here: curl -fsSL https://joxo.ai/setup.sh | sh
 ```
 
-It works in Claude Code, Codex, Cursor, Gemini CLI, OpenCode and [the other agents on joxo.ai/agents](https://joxo.ai/agents). There is nothing to install first: the line brings everything it needs, approves your computer once in the browser, and pairs the folder. [What it installs](https://joxo.ai/install).
+It works in Claude Code, Codex, Cursor, Gemini CLI, OpenCode and [the other agents on joxo.ai/agents](https://joxo.ai/agents). There is nothing to install first: the line brings everything it needs, approves your computer once in the browser, and pairs the folder. The line is Joxo's own installer: [read what it does first](https://joxo.ai/install).
+
+**No terminal, or using Claude.ai or ChatGPT?** Add Joxo as a connector instead, with nothing to install: in Claude, Customize > Connectors > Add custom connector; in ChatGPT, Settings > Plugins (or Apps > Developer mode) > Create. The URL is `https://joxo.ai/api/mcp`. [Exact steps](https://joxo.ai/connect).
 
 Teammates join the same way. Invite them from your project, and their line carries the invitation.
 
