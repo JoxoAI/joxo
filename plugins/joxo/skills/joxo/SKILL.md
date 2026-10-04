@@ -51,7 +51,6 @@ In PowerShell, the same three steps:
 
 ```powershell
 New-Item -ItemType Directory -Force "$HOME\.joxo" | Out-Null; Invoke-WebRequest https://joxo.ai/setup.ps1 -OutFile "$HOME\.joxo\setup.ps1"
-Get-Content "$HOME\.joxo\setup.ps1"
 & ([scriptblock]::Create((Get-Content -Raw "$HOME\.joxo\setup.ps1"))) <code>; Remove-Item "$HOME\.joxo\setup.ps1"
 ```
 
@@ -64,10 +63,8 @@ No invitation, but this folder is a clone of the project's GitHub repository? Pu
 where the link goes: it asks the project's owner and connects once they approve (exit 75 until
 then).
 
-A person with no agent installs the same way for the folder they are in: download
-https://joxo.ai/install to `~/.joxo/install.sh` (`mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/install -o ~/.joxo/install.sh`), read it, then run
-`sh ~/.joxo/install.sh` (PowerShell: download https://joxo.ai/install.ps1 to `$HOME\.joxo\install.ps1`
-and run it as a script block, `& ([scriptblock]::Create((Get-Content -Raw "$HOME\.joxo\install.ps1")))`). It ends in
+A person with no agent downloads https://joxo.ai/install the same way (`mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/install -o ~/.joxo/install.sh`), reads it
+and runs `sh ~/.joxo/install.sh` (PowerShell: https://joxo.ai/install.ps1, run as a script block). It ends in
 `joxo connect --yes`, which never asks on the terminal.
 
 If you cannot run a downloaded script, the same in three commands:
@@ -82,10 +79,9 @@ If you cannot run a downloaded script, the same in three commands:
    path as `command`.
 3. In the project folder, run `<that command> connect '<link>'` and carry on as below.
 
-To keep this skill for later, the person's agent can install it as a plugin or as a skill (offer it;
-run it only on a yes). Claude Code: `claude plugin marketplace add JoxoAI/joxo` then
-`claude plugin install joxo@joxo`. Codex: `codex plugin marketplace add JoxoAI/joxo` then
-`codex plugin add joxo@joxo`. Any other agent: `npx skills add JoxoAI/joxo`.
+To keep this skill, offer to install it and run that only on a yes. Claude Code: `claude plugin
+marketplace add JoxoAI/joxo` then `claude plugin install joxo@joxo`. Codex: `codex plugin
+marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`. Any other agent: `npx skills add JoxoAI/joxo`.
 
 ## What happens
 
