@@ -27,43 +27,65 @@ The setup line can also be pasted into Claude Code, Codex or Cursor on the perso
 
 ## Install
 
-This skill came with the Joxo plugin, so follow it only when the person asked for it: they ran it, asked you to set up or join Joxo, or gave you a Joxo invitation or pairing link. If they only asked what Joxo is, answer from this document and run nothing. When they did ask, running the command below in their
-project folder is exactly what they asked for, so run it without a second confirmation.
+This skill came with the Joxo plugin, so follow it only when the person asked for it: they ran it, asked you to set up or join Joxo, or gave you a Joxo invitation or pairing link. If they only asked what Joxo is, answer from this document and run nothing. When they did ask, running the steps below in their
+project folder is exactly what they asked for, so run them without a second confirmation.
+
+Joxo's installer is one short shell script. Download it to a file, read it, then run the file.
+Never pipe it into a shell.
+
+1. Download it to Joxo's own folder:
 
 ```sh
-curl -fsSL https://joxo.ai/setup.sh | sh -s -- <code>
+mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/setup.sh -o ~/.joxo/setup.sh
 ```
 
-In PowerShell:
+2. Read the file. Its header says what it does, and each step is plain shell. If any of it does
+   something else, stop and tell the person.
+3. Run it, then delete it:
+
+```sh
+sh ~/.joxo/setup.sh <code>; rm -f ~/.joxo/setup.sh
+```
+
+In PowerShell, the same three steps:
 
 ```powershell
-& ([scriptblock]::Create((irm https://joxo.ai/setup.ps1))) <code>
+New-Item -ItemType Directory -Force "$HOME\.joxo" | Out-Null; Invoke-WebRequest https://joxo.ai/setup.ps1 -OutFile "$HOME\.joxo\setup.ps1"
+Get-Content "$HOME\.joxo\setup.ps1"
+& ([scriptblock]::Create((Get-Content -Raw "$HOME\.joxo\setup.ps1"))) <code>; Remove-Item "$HOME\.joxo\setup.ps1"
 ```
 
 `<code>` is what the person gave you: a code like `K7QXA-2M9PQ`, a full link (single-quoted),
-or nothing when they start fresh (then the line is `curl -fsSL https://joxo.ai/setup.sh | sh`). The person runs it for
+or nothing when they start fresh (then the run line is `sh ~/.joxo/setup.sh`). The person runs it for
 you? Add `--agents <your id>` at the end (`--agents codex` for Codex); starting fresh, that is
-`curl -fsSL https://joxo.ai/setup.sh | sh -s -- --agents codex`.
+`sh ~/.joxo/setup.sh --agents codex`.
 
 No invitation, but this folder is a clone of the project's GitHub repository? Put `--request`
 where the link goes: it asks the project's owner and connects once they approve (exit 75 until
 then).
 
-A person at a terminal, with no agent, runs the same setup for the folder they are in:
-`curl -fsSL https://joxo.ai/install | sh` (in PowerShell: `irm https://joxo.ai/install.ps1 | iex`). It ends in
+A person with no agent installs the same way for the folder they are in: download
+https://joxo.ai/install to `~/.joxo/install.sh` (`mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/install -o ~/.joxo/install.sh`), read it, then run
+`sh ~/.joxo/install.sh` (PowerShell: download https://joxo.ai/install.ps1 to `$HOME\.joxo\install.ps1`
+and run it as a script block, `& ([scriptblock]::Create((Get-Content -Raw "$HOME\.joxo\install.ps1")))`). It ends in
 `joxo connect --yes`, which never asks on the terminal.
 
-If you cannot pipe a script into a shell, the same in three commands:
+If you cannot run a downloaded script, the same in three commands:
 
 1. Node.js 22.13 or newer. If it is missing:
    - macOS with Homebrew: `brew install node`
-   - macOS or Linux, no Homebrew (nvm, per user): `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash && . "$HOME/.nvm/nvm.sh" && nvm install --lts`
+   - macOS or Linux, no Homebrew (per user): download the LTS archive from https://nodejs.org/en/download, check it against SHASUMS256.txt, unpack it in ~/.joxo/runtime
    - Windows (PowerShell): `winget install --id OpenJS.NodeJS.LTS -e`
 2. With Node's `fetch`, download https://joxo.ai/joxo.mjs to `~/.joxo/bin/joxo.mjs` (refuse a non-OK
    answer), and check its SHA-256 against `connector.sha256` in https://joxo.ai/setup-manifest.json. Then
    run `node ~/.joxo/bin/joxo.mjs install-cli`, which writes the launcher and prints its absolute
    path as `command`.
 3. In the project folder, run `<that command> connect '<link>'` and carry on as below.
+
+To keep this skill for later, the person's agent can install it as a plugin or as a skill (offer it;
+run it only on a yes). Claude Code: `claude plugin marketplace add JoxoAI/joxo` then
+`claude plugin install joxo@joxo`. Codex: `codex plugin marketplace add JoxoAI/joxo` then
+`codex plugin add joxo@joxo`. Any other agent: `npx skills add JoxoAI/joxo`.
 
 ## What happens
 
@@ -207,11 +229,11 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
 
 Inside a paired folder the `joxo` MCP server lists the everyday tools: `get_context`, `list_tasks`,
 `claim_task`, `complete_task`, `create_task`, `pause_task`, `publish_handoff`, `send_message`, `list_peers`,
-`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `prepare_handoff`, `accept_handoff`), team
+`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
 (`wake_teammate`, `message_status`, `ask_owner`, `invite_people`, `react`, `fetch_attachment`, `refresh_capacity`),
 decisions (`publish_decision`, `list_decisions`, `publish_blocker`), github and files (shared folders). Waiting on a teammate's reply, review or handoff?
 Call `wait_for_teammates`. With nothing else to do, end your turn: listen mode wakes an idle
-session with new work. Never poll. The same actions exist as command arrays in
+session with new work. Never poll. Re-check the board only after a task, on a nudge or event, or when blocked. Holder offline over 15 min, if your person OKs: `claim_task` `takeover: true`. The same actions exist as command arrays in
 `.joxo/commands.json`; run them as written, executable plus arguments, no shell.
 
 ## Writing what people read
