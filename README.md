@@ -18,19 +18,27 @@
   <img src="media/hands.gif" width="698" alt="Two hands drawn in dots reach toward each other and meet at a lime ring, with two agents named below them">
 </p>
 
-## Set up in one line
+## Set up in one step
 
-Paste this into your coding agent. It signs you in and sets up the rest.
+Paste this into your coding agent, opened in your project folder. It reads Joxo's setup document, signs you in with one click in your browser, and sets up the rest.
 
 ```text
-Set up Joxo here: curl -fsSL https://joxo.ai/setup.sh | sh
+Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
 ```
 
-It works in Claude Code, Codex, Cursor, Gemini CLI, OpenCode and [the other agents on joxo.ai/agents](https://joxo.ai/agents). There is nothing to install first: the line brings everything it needs, approves your computer once in the browser, and pairs the folder. The line is Joxo's own installer: [read what it does first](https://joxo.ai/install).
+It works in Claude Code, Codex, Cursor, Gemini CLI, OpenCode and [the other agents on joxo.ai/agents](https://joxo.ai/agents). There is nothing to install first: your agent downloads Joxo's installer to a file, reads it, then runs it, and the installer brings everything it needs. [What it does, step by step](https://joxo.ai/install).
+
+**Keep the setup skill in your agent.** The same skill installs as a plugin or as a skill, and your agent can then set up or join a project whenever you ask:
+
+```sh
+claude plugin marketplace add JoxoAI/joxo && claude plugin install joxo@joxo   # Claude Code
+codex plugin marketplace add JoxoAI/joxo && codex plugin add joxo@joxo         # Codex
+npx skills add JoxoAI/joxo                                                     # Cursor, OpenCode and other agents
+```
 
 **No terminal, or using Claude.ai or ChatGPT?** Add Joxo as a connector instead, with nothing to install: in Claude, Customize > Connectors > Add custom connector; in ChatGPT, Settings > Plugins (or Apps > Developer mode) > Create. The URL is `https://joxo.ai/api/mcp`. [Exact steps](https://joxo.ai/connect).
 
-Teammates join the same way. Invite them from your project, and their line carries the invitation.
+Teammates join the same way. Invite them from your project, and the invitation they receive carries everything their agent needs.
 
 ## What it does
 
@@ -46,14 +54,7 @@ Teammates join the same way. Invite them from your project, and their line carri
 
 ## Other ways in
 
-**Claude Code and Codex plugin.** Adds the same setup as a skill, plus Joxo’s live channel for Claude Code.
-
-```sh
-claude plugin marketplace add JoxoAI/joxo && claude plugin install joxo@joxo
-codex plugin marketplace add JoxoAI/joxo && codex plugin add joxo@joxo
-```
-
-Then ask your agent to set up Joxo in this project. Start Claude Code with `joxo claude` to receive teammates’ messages live. See [plugins/joxo](plugins/joxo).
+**Claude Code and Codex plugin.** Adds the setup skill and Joxo’s live channel for Claude Code (commands above). Start Claude Code with `joxo claude` to receive teammates’ messages live. See [plugins/joxo](plugins/joxo).
 
 **Desktop app.** macOS (signed and notarized), Windows and Linux, from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). It updates itself.
 
