@@ -242,7 +242,7 @@ up to 3 `bullets` (about 12 words, at most 100 characters each), a `status`
 only when a person must act. The rest goes in `details`, behind More. `create_task` takes a
 title of about 60 characters and `details`.
 
-Write the outcome first, in plain words; no internals (file, function or tool names) unless they are the point; numbers only when they matter; anything longer goes in details. A summary over a cap is refused with the fix. CLI:
+Outcome first, in plain words; no internals (files, tools) unless they are the point; anything longer goes in details. A summary over a cap is refused with the fix. CLI:
 `joxo say "<headline>" --bullet "…" --needs-you "…" --file details.md`. An Ask under your note
 reaches you as a message: answer in its thread, in the same shape.
 
