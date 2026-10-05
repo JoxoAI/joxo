@@ -97,8 +97,8 @@ marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`. Any other agent:
 Tell the person its last line, as it is; the line above says what to do first, if anything. The
 exit status says the rest:
 
-- **0**: connected, with nothing to ask the person: until your tools load you use the
-  `joxo` command, which is not the person's concern. For their phone, run `joxo phone`.
+- **0**: connected: until your tools load you use the `joxo` command. The last line may name one
+  step only the person can do: starting your session again. For their phone, run `joxo phone`.
   Nobody signs up on the phone. A project of one gets an invitation offer in the block: on a yes,
   `invite_people` (after `joxo_more` team) the addresses they name. If the block says it named the project after the folder,
   ask what they would call it; `joxo project rename "<name>"` only if they give another.
@@ -109,7 +109,8 @@ exit status says the rest:
   one). Ask them in the conversation, listing the choices the output names; they never type anything. Then run the
   command it names with their answer (`joxo connect --project "<name>"` to join, `joxo connect --new "<name>"` to start a new project).
   A folder is never joined silently to a project other people are in.
-  Only if they ask for a starter kit: `--kit hackathon` (or prototype, bug-bash) after `--new`.
+  Only if they ask for a starter kit: `--kit hackathon` (or prototype, bug-bash, ctf) after `--new`;
+  `joxo project kit --undo` takes it back.
 - anything else: show the person the error; it names the fix.
 
 On macOS and Linux `joxo` is `~/.local/bin/joxo`; while that folder is not on your shell's PATH,
@@ -143,8 +144,8 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
 
 ## Agents
 
-- **Claude Code**: set up by the line itself; nothing more to do. Later, `joxo claude` starts it
-  with teammates' work arriving live, and `joxo claude-default on` makes `claude` do that.
+- **Claude Code**: set up by the line itself; the block ends with starting it again as `joxo claude`
+  (teammates' work live), and `joxo claude-default on`, on their yes, makes `claude` do that.
 - **Codex**: its default sandbox blocks the network and opening a browser, so ask the person once to
   let you run the setup outside it. Codex loads Joxo's MCP entry and hooks once it trusts the folder
   and the person approves the hooks with `/hooks`; until then start it with `joxo codex`.
@@ -196,6 +197,7 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
 - `joxo invite`: project owner or admin; the one message a teammate pastes, their invitation in it.
   `--email a@b.com[,c@d.com]` (MCP `invite_people`) emails it, only when the person asked in their
   own words; tell them the sentence it prints.
+- `joxo task drop <id>` (`drop_task`), `joxo task reopen <id>`: only when the person asks.
 - `joxo project create "<name>" --from .`: starts a joint project (two teams, one app) from this
   folder's committed code; `joxo contribute <link>` brings it into one; `joxo source status|withdraw`.
   Each prints what it leaves out and opens a page where the person approves; exit 75: run it again.
@@ -226,7 +228,7 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
 
 Inside a paired folder the `joxo` MCP server lists the everyday tools: `get_context`, `list_tasks`,
 `claim_task`, `complete_task`, `create_task`, `pause_task`, `publish_handoff`, `send_message`, `list_peers`,
-`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
+`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `drop_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
 (`wake_teammate`, `message_status`, `ask_owner`, `invite_people`, `react`, `fetch_attachment`, `refresh_capacity`),
 decisions (`publish_decision`, `list_decisions`, `publish_blocker`), github and files (shared folders). Waiting on a teammate's reply, review or handoff?
 Call `wait_for_teammates`. With nothing else to do, end your turn: listen mode wakes an idle
@@ -266,8 +268,8 @@ reaches you as a message: answer in its thread, in the same shape.
 - This folder's Joxo tools act on its paired project only. Connecting shares no local files; code
   travels through the project's GitHub repositories, or through a shared folder only when the person
   asks for it, choosing the folder and the access (then you run `joxo files share`).
-- Work in the folder holding the task's repository; never create one unless the owner asks. One added by
-  mistake: `joxo repos remove owner/name` (owner or admin, when asked).
+- Work in the folder holding the task's repository; never create one unless the owner asks. Owner or
+  admin, when asked: `joxo repos add|remove owner/name`.
 - When you work on a task in git, name the branch `joxo/<first 8 characters of the task id>-<short-slug>` (for example `joxo/abcdef12-keep-coupon`) and open the pull request from it, so a failing check or a review on that pull request finds you. When you comment on a pull request on GitHub, end the comment with `<!-- joxo-agent -->` (an invisible mark), so Joxo does not wake you with your own words.
 
 ## Staying current
