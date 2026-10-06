@@ -76,7 +76,7 @@ async function lookOnce($: EngineInterface): Promise<void> {
     const ran = await runJoxo($, ['pulse', '--json'], cwd, 25_000)
     lastLookAt = await $.clock.now()
     if (joxo === null) {
-      reading = { kind: 'error', reason: 'run joxo setup once so the mod knows where joxo is' }
+      reading = { kind: 'error', reason: 'one step left: ask your agent to run joxo setup, so this panel knows where joxo is' }
       isDormant = true
     } else if (ran === null || ran.exitCode === 127 || ran.exitCode === 126) {
       reading = reading?.kind === 'ok' ? afterFailure(reading, '') : { kind: 'error', reason: 'the joxo command could not be started' }
@@ -148,7 +148,7 @@ function makeActions($: EngineInterface): Actions {
 
 /** What to say in a pane that has no picture to draw yet. */
 function emptyMessage(): string {
-  if (joxo === null) return 'The Joxo mod needs one step: run joxo setup in a terminal, or ask your agent to. It records where joxo is, so this mod never has to look it up.'
+  if (joxo === null) return 'One step left: ask your agent to run joxo setup here. It records where joxo is, so this panel never has to look it up.'
   if (reading === null) return 'Reading your project…'
   if (reading.kind === 'unpaired') return 'This folder is not connected to a Joxo project. Ask your agent to “set up Joxo”.'
   if (reading.kind === 'error') return `Joxo is not reachable from here (${reading.reason}).`

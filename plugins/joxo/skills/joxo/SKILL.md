@@ -11,9 +11,9 @@ handoffs, each person on their own subscription, with no API keys and no API bil
 models, sells no inference, and reads no prompts or transcripts.
 
 **Chat apps without a terminal** (Claude.ai, ChatGPT) cannot run the setup command, which runs on a
-computer. It is Joxo's own installer, and https://joxo.ai/install describes what it does. Without a terminal Joxo
-is added as a connector: in Claude, Customize, Connectors, Add custom connector, URL https://joxo.ai/api/mcp; in
-ChatGPT, Settings, Plugins (or Apps, Developer mode), Create, the same URL, OAuth. Steps: https://joxo.ai/connect.
+computer. It is Joxo's own installer, and https://joxo.ai/install describes what it does. There, Joxo is
+added as a connector: in Claude, Customize, Connectors, Add custom connector, URL https://joxo.ai/api/mcp; in
+ChatGPT, Settings, Plugins (or Apps, Developer mode), Create, the same URL, OAuth. Steps: https://joxo.ai/setup#connect.
 The setup line can also be pasted into Claude Code, Codex or Cursor on the person's own computer.
 
 ## Requirements
@@ -80,9 +80,9 @@ If you cannot run a downloaded script, the same in three commands:
    path as `command`.
 3. In the project folder, run `<that command> connect '<link>'` and carry on as below.
 
-To keep this skill, offer to install it and run that only on a yes. Claude Code: `claude plugin
-marketplace add JoxoAI/joxo` then `claude plugin install joxo@joxo`. Codex: `codex plugin
-marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`. Any other agent: `npx skills add JoxoAI/joxo`.
+Setup adds this skill to Claude Code (`claude plugin install joxo@joxo`) with its team band and
+/team panel. `joxo setup --no-claude-plugin` turns it off. Elsewhere, on a yes: Codex, `codex
+plugin marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`; others, `npx skills add JoxoAI/joxo`.
 
 ## What happens
 
@@ -209,8 +209,8 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
   click (which signs that browser in too).
   Read out the eight-character code it prints only if the camera fails; with no browser, tell them
   the file it names or the code to type. `--sign-out` signs that phone out.
-- "Pin my phone": `joxo control questions on` (`permissions on`: prompts too); add
-  `--code <code>` when they read you their phone's code.
+- "Pin my phone": `joxo control questions on` (`permissions on`: prompts too) does the same; add
+  `--code <code>` if they read you their phone's code.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>
   "<message>"`: publish to the project, replace a decision, nudge one teammate's computer.
 - `joxo control keep-going|team-tasks|events|tips on|off`, `joxo control permissions on`:
