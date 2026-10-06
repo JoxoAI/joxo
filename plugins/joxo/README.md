@@ -24,7 +24,9 @@ claude plugin install joxo@joxo
 ```
 
 In a session, on Claude Code 2.1.275 or later: `/plugin install joxo --marketplace JoxoAI/joxo`.
-Once Joxo is set up, `joxo setup` in a terminal also offers to install it for you.
+Joxo's setup adds it for you wherever Claude Code is installed, and says so in one line. To turn it
+off, ask your agent to run `joxo setup --no-claude-plugin`: it is removed and not added again. A plugin
+installed while Claude Code is open shows after `/reload-plugins` or at the next start.
 
 Codex:
 
@@ -93,7 +95,7 @@ check, and to need none of that:
   records the absolute paths of node and of `joxo.mjs` in this plugin's two options (`nodePath`,
   `joxoPath`, plain paths, nothing secret). The mod runs `[nodePath, joxoPath, …]` from the folder
   `joxo.mjs` is in and names your project with `--dir`. Until those options are set it runs nothing, and
-  the pane tells you to run `joxo setup`. Everything it shows comes from `joxo pulse`.
+  the pane asks you to have your agent run `joxo setup`. Everything it shows comes from `joxo pulse`.
 - `joxo pulse` acknowledges nothing, so looking never uses up a message your agent has not read yet. It
   refreshes the roster the way `joxo sync` does, so like `joxo sync` it records what arrived in the
   project's `.joxo` state and `JOXO_CONTEXT.md` (only when they changed), and it may send what was
