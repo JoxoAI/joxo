@@ -23,6 +23,8 @@ The setup line can also be pasted into Claude Code, Codex or Cursor on the perso
 - A coding agent: Claude Code, Codex, Cursor, OpenCode and more.
 - One sign-in (Apple, GitHub or whatever else this Joxo offers), in a browser tab the setup opens. A setup link carries the
   account, so it needs none.
+- Trial: 14 days, starting when the person's agent first works in a project; once per identity;
+  no card required.
 
 ## Install
 
@@ -207,6 +209,8 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
   click (which signs that browser in too).
   Read out the eight-character code it prints only if the camera fails; with no browser, tell them
   the file it names or the code to type. `--sign-out` signs that phone out.
+- "Pin my phone": `joxo control questions on` (`permissions on`: prompts too); add
+  `--code <code>` when they read you their phone's code.
 - `joxo say "<message>"`, `joxo decision "<decision>" --supersedes <id>`, `joxo wake <teammate>
   "<message>"`: publish to the project, replace a decision, nudge one teammate's computer.
 - `joxo control keep-going|team-tasks|events|tips on|off`, `joxo control permissions on`:
