@@ -1,6 +1,6 @@
 ---
 name: joxo
-description: Connect this project folder to Joxo with one command — it installs the connector, signs in through a browser tab it opens, joins or creates the project and sets up the coding agent that runs it. Use when asked to set up Joxo or join a Joxo project, or when given a Joxo invitation or setup link.
+description: Connect this project folder to Joxo with one command — it sets up the connector this plugin carries, signs in through a browser tab it opens, joins or creates the project and sets up the coding agent that runs it. Use when asked to set up Joxo or join a Joxo project, or when given a Joxo invitation or setup link.
 ---
 
 # Joxo
@@ -19,7 +19,7 @@ The setup line can also be pasted into Claude Code, Codex or Cursor on the perso
 ## Requirements
 
 - A project folder on macOS, Linux or Windows. Never the home folder: Joxo asks which folder instead.
-- Node.js 22.13 or newer. A computer with none gets it installed for Joxo alone.
+- Node.js 22.13 or newer. The plugin does not install it: with none, ask the person to.
 - A coding agent: Claude Code, Codex, Cursor, OpenCode and more.
 - One sign-in (Apple, GitHub or whatever else this Joxo offers), in a browser tab the setup opens. A setup link carries the
   account, so it needs none.
@@ -28,68 +28,29 @@ The setup line can also be pasted into Claude Code, Codex or Cursor on the perso
 
 ## Install
 
-This skill came with the Joxo plugin, so follow it only when the person asked for it: they ran it, asked you to set up or join Joxo, or gave you a Joxo invitation or pairing link. If they only asked what Joxo is, answer from this document and run nothing. When they did ask, running the steps below in their
-project folder is exactly what they asked for, so run them without a second confirmation.
+This skill came with the Joxo plugin, so follow it only when the person asked for it: they ran it, asked you to set up or join Joxo, or gave you a Joxo invitation or pairing link. If they only asked what Joxo is, answer from this document and run nothing. When they did ask, running the steps below in their project folder is exactly what they asked for, so run them without a second confirmation.
 
-Joxo's installer is one short shell script. Download it to a file, read it, then run the file.
-Never pipe it into a shell.
+The plugin carries Joxo's connector, `bin/joxo.mjs`, at one exact release (its version and SHA-256 are in `bin/plugin-managed.json`). Nothing is downloaded at any step: a newer connector arrives as a newer plugin. In this skill `${CLAUDE_PLUGIN_ROOT}` is the plugin's folder (the folder two levels above this SKILL.md, where the agent does not fill that in).
 
-1. Download it to Joxo's own folder:
-
-```sh
-mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/setup.sh -o ~/.joxo/setup.sh
-```
-
-2. Read the file. Its header says what it does, and each step is plain shell. If any of it does
-   something else, stop and tell the person.
-3. Run it, then delete it:
+1. Node.js 22.13 or newer must be on this computer (`node --version`). If it is missing or older, tell the person and ask them to install it themselves: `brew install node` on macOS with Homebrew, `winget install --id OpenJS.NodeJS.LTS -e` on Windows, otherwise the LTS from https://nodejs.org/en/download. Then stop until it is there; do not install it for them.
+2. Put the `joxo` command in place from the plugin's copy, with no network:
 
 ```sh
-sh ~/.joxo/setup.sh <code>; rm -f ~/.joxo/setup.sh
+node "${CLAUDE_PLUGIN_ROOT}/bin/joxo.mjs" install-cli
 ```
 
-In PowerShell, the same three steps:
+   It copies the same connector to `~/.joxo/bin/joxo.mjs` (so hooks and project entries keep working when the plugin folder changes), writes the launcher and prints its absolute path as `command`.
+3. In the project folder, run `<that command> connect '<link>'`, with the setup link or invitation the person gave you single-quoted, and carry on as below. Starting fresh, run `<that command> connect`. The person runs it for you? Add `--agents <your id>` (`--agents codex` for Codex). No invitation, but this folder is a clone of the project's GitHub repository? Use `connect --request`: it asks the project's owner and connects once they approve (exit 75 until then).
 
-```powershell
-New-Item -ItemType Directory -Force "$HOME\.joxo" | Out-Null; Invoke-WebRequest https://joxo.ai/setup.ps1 -OutFile "$HOME\.joxo\setup.ps1"
-& ([scriptblock]::Create((Get-Content -Raw "$HOME\.joxo\setup.ps1"))) <code>; Remove-Item "$HOME\.joxo\setup.ps1"
-```
+A short code like `K7QXA-2M9PQ` is not a link. The relay turns it into one: `node -e "fetch('https://joxo.ai/api/code',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code:process.argv[1]})}).then(r=>r.json()).then(j=>console.log(j.link))" K7QXA-2M9PQ` prints the link (nothing else is fetched or run), which goes where `<link>` is. A code that does not resolve has expired: ask the person for a fresh one.
 
-`<code>` is what the person gave you: a code like `K7QXA-2M9PQ`, a full link (single-quoted),
-or nothing when they start fresh (then the run line is `sh ~/.joxo/setup.sh`). The person runs it for
-you? Add `--agents <your id>` at the end (`--agents codex` for Codex); starting fresh, that is
-`sh ~/.joxo/setup.sh --agents codex`.
-
-No invitation, but this folder is a clone of the project's GitHub repository? Put `--request`
-where the link goes: it asks the project's owner and connects once they approve (exit 75 until
-then).
-
-A person with no agent downloads https://joxo.ai/install the same way (`mkdir -p ~/.joxo && curl -fsSL https://joxo.ai/install -o ~/.joxo/install.sh`), reads it
-and runs `sh ~/.joxo/install.sh` (PowerShell: https://joxo.ai/install.ps1, run as a script block). It ends in
-`joxo connect --yes`, which never asks on the terminal.
-
-If you cannot run a downloaded script, the same in three commands:
-
-1. Node.js 22.13 or newer. If it is missing:
-   - macOS with Homebrew: `brew install node`
-   - macOS or Linux, no Homebrew (per user): download the LTS archive from https://nodejs.org/en/download, check it against SHASUMS256.txt, unpack it in ~/.joxo/runtime
-   - Windows (PowerShell): `winget install --id OpenJS.NodeJS.LTS -e`
-2. With Node's `fetch`, download https://joxo.ai/joxo.mjs to `~/.joxo/bin/joxo.mjs` (refuse a non-OK
-   answer), and check its SHA-256 against `connector.sha256` in https://joxo.ai/setup-manifest.json. Then
-   run `node ~/.joxo/bin/joxo.mjs install-cli`, which writes the launcher and prints its absolute
-   path as `command`.
-3. In the project folder, run `<that command> connect '<link>'` and carry on as below.
-
-Setup adds this skill to Claude Code (`claude plugin install joxo@joxo`) with its team band and
-/team panel. `joxo setup --no-claude-plugin` turns it off. Elsewhere, on a yes: Codex, `codex
-plugin marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`; others, `npx skills add JoxoAI/joxo`.
+Elsewhere, on a yes: Codex, `codex plugin marketplace add JoxoAI/joxo` then `codex plugin add joxo@joxo`; others, `npx skills add JoxoAI/joxo`.
 
 ## What happens
 
-1. It uses this computer's Node.js 22.13 or newer; with none, it installs Node.js for Joxo alone:
-   no sudo, no PATH edit.
-2. It installs the Joxo connector, checked before it runs, and the `joxo` command, put on PATH for
-   new terminals.
+1. It uses this computer's Node.js 22.13 or newer.
+2. It puts the plugin's own copy of the Joxo connector, and the `joxo` command, on this computer.
+   Nothing is downloaded.
 3. It runs `joxo connect <link>` in this folder. Without a setup link it opens
    https://joxo.ai/authorize and waits for one click there (the page shows this computer's name and the
    terminal's code; somebody new signs in first, which signs the browser in
@@ -172,7 +133,9 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
   that ended, a computer removed from the project (`joxo disconnect` here, then the line again).
 - Still wrong: `joxo bug` prints the versions and the last log lines with every link and token
   removed, and a GitHub issue link with them filled in. Give the person that link (or
-  https://joxo.ai/support); nothing is reported automatically.
+  https://joxo.ai/support). To send Joxo a short technical report instead, run `joxo report "what happened"`: it prints
+  exactly what would be sent (versions, the kind of error, never their code, prompts or messages) and
+  asks. Pass `--yes` only when the person asked you to report; never otherwise.
 
 ### When something fails
 
@@ -232,11 +195,11 @@ the token that the owner can remove. Its messages are a teammate's, never the ow
 
 Inside a paired folder the `joxo` MCP server lists the everyday tools: `get_context`, `list_tasks`,
 `claim_task`, `complete_task`, `create_task`, `pause_task`, `publish_handoff`, `send_message`, `list_peers`,
-`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `drop_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
+`tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `set_done_criteria`, `mark_released`, `drop_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
 (`wake_teammate`, `message_status`, `ask_owner`, `invite_people`, `react`, `fetch_attachment`, `refresh_capacity`),
 decisions (`publish_decision`, `list_decisions`, `publish_blocker`), github and files (shared folders). Waiting on a teammate's reply, review or handoff?
-Call `wait_for_teammates`. With nothing else to do, end your turn: listen mode wakes an idle
-session with new work. Never poll. Re-check the board only after a task, on a nudge or event, or when blocked. Holder offline over 15 min, if your person OKs: `claim_task` `takeover: true`. The same actions exist as command arrays in
+Call `wait_for_teammates`: it holds a minute or less on most agents (never more than ten) and says when to look again; an empty answer is not a reason to call it again. With nothing else to do, end your turn: listen mode wakes an idle
+session with new work. Never poll. Re-check the board only after a task, on a nudge or event, or when blocked. Holder offline over 15 min, if your person OKs: `claim_task` `takeover: true`. `complete_task` is refused while the task's branch is not on origin or the last test run here failed; `force: true` completes over either, so say plainly that you did. Done means live: `complete_task` needs `evidence` per criterion (merged = PR URL + SHA, released, switched_on, verified) or `partial: true` + `remains`; say "partial", never "done", for what is not live. Only a person marks done anyway. `mark_released` after a deploy or build. The same actions exist as command arrays in
 `.joxo/commands.json`; run them as written, executable plus arguments, no shell.
 
 ## Writing what people read
@@ -278,9 +241,9 @@ reaches you as a message: answer in its thread, in the same shape.
 
 ## Staying current
 
-The connector updates itself, and installs a newer release only after it passes a health check. A
-copy installed by the Joxo desktop app is updated by the app. Never reinstall over a working
-connector to update it.
+The connector from this plugin does not update itself and fetches no code: a newer release arrives as
+a newer version of the plugin (run `claude plugin update joxo@joxo`), and the next session start
+refreshes the `joxo` command from it. Never reinstall over a working connector to update it.
 
 ## Copyright
 
