@@ -1,7 +1,7 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "0.2.58",
+  "version": "0.2.59",
   "description": "Joxo for Claude Code: the setup skill, the live channel for teammates' messages and handoffs, and a quiet live view of your team (a mod: band, pane, toasts) that only reads through the joxo command you already installed.",
   "author": {
     "name": "Joxo",
