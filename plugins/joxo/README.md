@@ -145,30 +145,79 @@ flag, and ignore them otherwise); Claude Code older than that loads the rest of 
 The mod shows your usage for each Claude account because Joxo already knows it. It is the same
 figure `joxo status` prints. It is never sent anywhere by the mod.
 
+## What the hook does
+
+The plugin has one hooks module, `hooks/hooks.json`, which loads `./register.tsx`. It is the
+live view described above and does nothing else: a line above the prompt (the band), the `/team`
+pane, and toasts for new messages and handoffs. It runs only inside a folder paired with a Joxo
+project, reads nothing but what `joxo pulse --json` prints, and changes no file of yours. The
+`hooks` list in `hooks.json` is empty on purpose: it runs no command on your prompts, tool calls or
+sessions.
+
+## Programs it runs
+
+- **The Joxo app's own command**, by absolute path, through the `node` that Joxo's setup recorded
+  (`nodePath`, `joxoPath`). Nothing is found through PATH. The mod runs it with no shell, in the
+  three fixed forms listed below. The channel entry runs it as
+  `<nodePath> <joxoPath> mcp --if-paired --channel-only`, with `JOXO_NO_TELEMETRY=1` in its environment.
+- **What that command may start, because Joxo needs it**: `git` (to read the branch and latest commit
+  for handoffs, and to receive a project's repository into an empty folder when you join one);
+  your agent programs (`claude`, `codex`) when you have turned on listening or ask Joxo to start an
+  agent; the GitHub command line (`gh`) only for GitHub steps you ask for; and your operating
+  system's own tools to open a browser or check which of your agent processes are running. The plugin
+  itself starts none of these.
+- Nothing is downloaded or installed by the plugin. Joxo's setup (which you ask for) downloads the Joxo
+  app from joxo.ai.
+
+## What it sends and where
+
+The plugin has no network access of its own. The Joxo command it runs talks to the Joxo relay at
+`joxo.ai` (and nowhere else on the plugin's behalf), and sends only what your project shares on
+purpose: tasks, messages, decisions, handoffs and blockers; presence (which of your agent sessions
+are working or waiting); computer names, installed agents and a usage summary so teammates can see
+who has room. Your prompts, transcripts, code and provider credentials are not sent. The details are
+at [joxo.ai/privacy](https://joxo.ai/privacy).
+
+**Usage counts and crash reports are off in the plugin.** The channel entry sets
+`JOXO_NO_TELEMETRY=1`, which stops Joxo's usage counts and automatic crash reports for that
+process and deletes anything queued. (If you use Joxo outside the plugin, the setting and
+`joxo control telemetry off` are yours to choose.)
+
+## The exact commands the mod runs
+
+Fixed text, no shell, each preceded by `<nodePath> <joxoPath>` and followed by `--dir <your project folder>`:
+
+```text
+pulse --json
+task claim <task id>
+open
+```
+
+`pulse --json` is the read. `task claim` runs only when you press **Take**, and `open` only when you
+press **Open on web**. The mod calls Claude Code's `$.process.run` for these and for nothing else.
+
 ## What installing it does
 
-Installing the plugin copies the skill, one MCP server entry, one small mod and Joxo's connector
-(`bin/joxo.mjs`) from this repository. The connector is the released file at one exact version:
-`bin/plugin-managed.json` names its version and SHA-256, and it is the same bytes joxo.ai serves for
-that release. The entry runs it from the plugin's own folder (`node ${CLAUDE_PLUGIN_ROOT}/bin/joxo.mjs mcp
---if-paired --channel-only`). **Nothing in the plugin downloads or runs code that is not in this
-repository**: the plugin's copy of the connector never updates itself (`JOXO_NO_SELF_UPDATE=1`, and the
-receipt beside it), so a newer connector arrives as a newer plugin version. The mod (the files in
-`hooks/`) is about 900 lines of TypeScript that you can read in full, and it is described below. It
-runs the `joxo` command by the absolute paths of node and of `joxo.mjs` that `joxo install-cli` and
-`joxo setup` record in this plugin's two options (`nodePath`, `joxoPath`); without them it shows nothing.
+Installing the plugin copies the skill, one MCP server entry and one small mod from this
+repository. The entry runs `joxo mcp --if-paired --channel-only` through the `joxo.mjs` that Joxo's
+setup put on your computer, by absolute path: `joxo setup` records the paths of node and of `joxo.mjs`
+in this plugin's two options (`nodePath`, `joxoPath`), and the entry is `${user_config.nodePath}
+${user_config.joxoPath} mcp …`. It is never found through PATH, so a repository's `node_modules/.bin`,
+a `.` in PATH or a direnv cannot put its own `joxo` in the way. Until setup has recorded the paths the
+entry starts nothing (Claude Code lists the server as one that could not start; run `joxo setup`). **Install Joxo first**: this plugin connects Claude Code to the Joxo app you installed, and contains no Joxo program of its own. The mod (the files in
+`hooks/`) is about 900 lines of TypeScript that you can read in full, and it is described below.
 
-That entry does something only when the folder you opened is paired with a Joxo
+That entry does something only when Joxo is installed, the folder you opened is paired with a Joxo
 project, and you started Claude Code with Joxo's channel. In every other session it offers no
 tools, adds nothing to what your agent reads, and contacts nobody. (The mod is separate; it is
 described next.) Joxo's tools come from the
-project's own settings, so they are never listed twice. Without Node.js 22.13 or newer on PATH, Claude Code
-lists the entry as a server that could not start.
+project's own settings, so they are never listed twice. Until Joxo is installed, Claude Code lists
+the entry as a server that could not start; setup fixes that.
 
 The skill does nothing until you ask your agent to set up or join Joxo. Setup then does exactly
-the setup steps in the skill: it checks Node.js (and, when it is missing or too old, asks you to
-install it; the plugin installs nothing), runs `node bin/joxo.mjs install-cli`, which copies the plugin's
-connector to `~/.joxo/bin` with no network, signs you in with one approval in your browser, and pairs this folder. When you join a
+what the pasted prompt does: it checks Node.js and, when it is missing or too old, installs the
+current LTS and says which command it runs (never with sudo), downloads the connector from
+joxo.ai, signs you in with one approval in your browser, and pairs this folder. When you join a
 project whose code is on GitHub, an empty folder first receives that repository, if git on this
 computer can fetch it. Pairing adds Joxo's MCP server and hooks to that folder's agent settings
 (for Claude Code, `.mcp.json` and `.claude/settings.local.json`). `joxo disconnect` detaches the
