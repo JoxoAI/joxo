@@ -1,15 +1,15 @@
 {
   "mcpServers": {
     "joxo": {
-      "command": "node",
+      "command": "${user_config.nodePath}",
       "args": [
-        "${CLAUDE_PLUGIN_ROOT}/bin/joxo.mjs",
+        "${user_config.joxoPath}",
         "mcp",
         "--if-paired",
         "--channel-only"
       ],
       "env": {
-        "JOXO_NO_SELF_UPDATE": "1"
+        "JOXO_NO_TELEMETRY": "1"
       }
     }
   }
