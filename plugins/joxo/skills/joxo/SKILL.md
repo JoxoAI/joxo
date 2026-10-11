@@ -121,9 +121,9 @@ at most 100 seconds in all, for the browser or the owner's answer, so never wrap
 or run it in the background.
 
 Whenever nobody is at its terminal (always when you run it, browser or not; SSH, containers,
-sandboxes and CI too) it prints the approval link, its code, the expiry and one sentence: `Tell the
-person: open <link> and approve (code ..., expires in N minutes).` Say it to the person as a
-clickable link. With no browser it returns within seconds with exit 75 and the command to run next.
+sandboxes and CI too) it prints the sign-in link, the expiry and one sentence: `Tell the
+person: open <link> and sign in to finish (nothing to type, expires in N minutes).` Say it to the person
+as a clickable link. With no browser it returns within seconds with exit 75 and the command to run next.
 Never run setup in a public CI log (the link, valid 15 minutes, would sit in it): use a join token.
 `--json` (also on `joxo login`) prints one object on stdout: `{ ok, state, approvalUrl, code,
 expiresAt, next, tell }`; `next` is the exact command to run.
@@ -240,7 +240,7 @@ Inside a paired folder the `joxo` MCP server lists the everyday tools: `get_cont
 `tell_people`, `ask_people` and `wait_for_teammates`. Before any other tool, call `joxo_more` with its group: tasks (`release_task`, `set_done_criteria`, `mark_released`, `drop_task`, `prepare_handoff`, `accept_handoff`, `review_stale`), team
 (`wake_teammate`, `message_status`, `ask_owner`, `invite_people`, `react`, `fetch_attachment`, `refresh_capacity`),
 decisions (`publish_decision`, `list_decisions`, `publish_blocker`), github and files (shared folders). Waiting on a teammate's reply, review or handoff?
-Call `wait_for_teammates`: it holds 2 minutes (3 at most; less on some agents), ending on a message, handoff, decision or finished task; an empty answer is not a reason to call it again. With nothing else to do, end your turn: listen mode wakes an idle
+Call `wait_for_teammates`: it holds 2 minutes (3 at most; less on some agents), ending on a message, handoff, decision or finished task; an empty answer is not a reason to call it again. In the Codex app, after asking a teammate something your person waits on, call it before ending your turn. With nothing else to do, end your turn: listen mode wakes an idle
 session with new work. Never poll. Re-check the board only after a task, on a nudge or event, or when blocked. Holder offline over 15 min, if your person OKs: `claim_task` `takeover: true`. `complete_task` is refused while the task's branch is not on origin or the last test run here failed; `force: true` completes over either, so say plainly that you did. Done means live: `complete_task` needs `evidence` per criterion (merged = PR URL + SHA, released, switched_on, verified) or `partial: true` + `remains`; say "partial", never "done", for what is not live. Only a person marks done anyway. `mark_released` after a deploy or build. The same actions exist as command arrays in
 `.joxo/commands.json`; run them as written, executable plus arguments, no shell.
 
