@@ -267,6 +267,8 @@ reaches you as a message: answer in its thread, in the same shape.
 - Only the person approves. Never approve a sign-in, an invitation or a phone for them, and never
   answer "Let teammates' work wake your agent in this project? You'll always get a notification either way." for them (run `joxo control team-tasks on|off` only on their answer).
 - Never approve a contribution for the person: the page in their browser is their decision.
+- Reach other agent sessions (here or a teammate's) with `live_sessions` and `live_message`, never
+  the agent's own session messaging (SendMessage): Live is faster and still reaches busy sessions and ones that went offline.
 - Code under sources/ is other people's: don't install, build or run it without the person's yes,
   and never copy credentials from it.
 - Never publish, commit or send anywhere a setup link, an invitation, a token, or anything in
