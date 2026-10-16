@@ -1,6 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 
-import { ago, bandText, bandGroups, commandFrom, displayName, fitGroups, hasNews, initialsOf, isAbsolute, nextDelayMs, parsePulse, pickToasts, plain, presenceOf, signature, statusText } from '../hooks/model.ts'
+import { ago, bandText, bandGroups, displayName, fitGroups, hasNews, initialsOf, isAbsolute, nextDelayMs, parsePulse, pickToasts, plain, presenceOf, signature, statusText } from '../hooks/model.ts'
 import type { Pulse } from '../hooks/model.ts'
 import { NOW_MS, TEAM, json } from './fixtures.ts'
 
@@ -112,16 +112,12 @@ test('polling is gentle: slower when idle, backing off on failure, twice an hour
   expect(nextDelayMs({ ...base, isDormant: true })).toBe(30 * 60_000)
 })
 
-test('joxo is run by absolute path only: a bare name, a relative path or a control byte means no command', async () => {
-  expect(commandFrom({ nodePath: '/opt/node', joxoPath: '/home/me/.joxo/bin/joxo.mjs' })).toEqual({ argv: ['/opt/node', '/home/me/.joxo/bin/joxo.mjs'], home: '/home/me/.joxo/bin' })
-  expect(commandFrom({ nodePath: 'C:\\node\\node.exe', joxoPath: 'C:\\Users\\me\\.joxo\\bin\\joxo.mjs' })?.home).toBe('C:\\Users\\me\\.joxo\\bin')
-  expect(commandFrom({})).toBeNull()
-  expect(commandFrom({ nodePath: 'node', joxoPath: '/x/joxo.mjs' })).toBeNull()
-  expect(commandFrom({ nodePath: '/n', joxoPath: 'joxo' })).toBeNull()
-  expect(commandFrom({ nodePath: '/n', joxoPath: './node_modules/.bin/joxo' })).toBeNull()
-  expect(commandFrom({ nodePath: '/n', joxoPath: '/x\n/joxo.mjs' })).toBeNull()
+test('isAbsolute accepts only an absolute path', async () => {
   expect(isAbsolute('/ok')).toBe(true)
+  expect(isAbsolute('C:\\ok')).toBe(true)
   expect(isAbsolute('ok')).toBe(false)
+  expect(isAbsolute('./ok')).toBe(false)
+  expect(isAbsolute('/x\n/y')).toBe(false)
 })
 
 test('ago is short', async () => {

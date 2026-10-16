@@ -1,5 +1,5 @@
 {
-  "description": "Joxo's live band, pane and toasts for Claude Code (a mod). Reads the project through the joxo command only.",
+  "description": "Joxo's live band, pane and toasts for Claude Code (a mod). Asks the plugin's own MCP server only; starts no program.",
   "hooks": {},
   "modules": ["./register.tsx"]
 }

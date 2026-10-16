@@ -42,5 +42,3 @@ export const TEAM = {
 export const NOW_MS = NOW
 export const json = (value: unknown) => JSON.stringify(value)
 
-/** What `joxo setup` records in the plugin's options. */
-export const SETUP = { nodePath: '/opt/node/bin/node', joxoPath: '/home/me/.joxo/bin/joxo.mjs' }
