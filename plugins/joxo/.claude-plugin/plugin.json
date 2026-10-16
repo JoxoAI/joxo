@@ -25,7 +25,8 @@
       "type": "string",
       "title": "Node.js path",
       "description": "Absolute path of the node that runs joxo. `joxo setup` fills this in; leave it empty and run joxo setup.",
-      "required": false
+      "required": false,
+      "default": "node"
     },
     "joxoPath": {
       "type": "string",

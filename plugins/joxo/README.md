@@ -157,7 +157,7 @@ sessions.
 ## Programs it runs
 
 - **The Joxo app's own command**, by absolute path, through the `node` that Joxo's setup recorded
-  (`nodePath`, `joxoPath`). Nothing is found through PATH. The mod runs it with no shell, in the
+  (`nodePath`, `joxoPath`). Nothing is found through PATH (`nodePath` carries the default `node` only so the entry names its program; without `joxoPath` nothing starts). The mod runs it with no shell, in the
   three fixed forms listed below. The channel entry runs it as
   `<nodePath> <joxoPath> mcp --if-paired --channel-only`, with `JOXO_NO_TELEMETRY=1` in its environment.
 - **What that command may start, because Joxo needs it**: `git` (to read the branch and latest commit
