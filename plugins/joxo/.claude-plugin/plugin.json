@@ -9,6 +9,9 @@
     "url": "https://joxo.ai"
   },
   "homepage": "https://joxo.ai",
+  "privacyPolicyUrl": "https://joxo.ai/privacy",
+  "termsOfServiceUrl": "https://joxo.ai/terms",
+  "supportUrl": "https://joxo.ai/support",
   "repository": "https://github.com/JoxoAI/joxo",
   "keywords": [
     "team",
