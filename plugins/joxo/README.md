@@ -20,8 +20,7 @@ codex plugin marketplace add JoxoAI/joxo
 codex plugin add joxo@joxo
 ```
 
-Then ask your agent to "set up Joxo in this project", or run `/joxo:joxo`. Install the Joxo app
-first: the plugin holds no Joxo program of its own.
+Install the Joxo app first (https://joxo.ai/install): the plugin holds no Joxo program of its own.
 
 ## What it runs
 
@@ -35,7 +34,7 @@ first: the plugin holds no Joxo program of its own.
   `team_take` (only when you press **Take**, to claim that task) and `team_open` (only when you press
   **Open on web**, to open the project in your browser). `hooks.json` has no settings hooks. It keeps one list of messages it already showed in its
   own store.
-- The skill holds no command. It points your agent to https://joxo.ai/skill.md when you ask for setup.
+- The skill holds no command and fetches nothing. It points you to https://joxo.ai/install when you ask for setup.
 
 ## What it sends
 
