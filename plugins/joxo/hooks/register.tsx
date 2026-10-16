@@ -3,13 +3,11 @@
  * what is addressed to this computer, and a small status entry.
  *
  * What this mod does, all of it:
- *  - runs `joxo pulse --json`, `joxo task claim <id>` (only when a person presses Take) and
- *    `joxo open` (only when a person presses Open on web) through $.process.run. The command is never
- *    looked up by name: `joxo setup` records the absolute paths of node and of joxo.mjs in this plugin's
- *    options (nodePath, joxoPath), the mod runs [nodePath, joxoPath, …] from the folder joxo.mjs is in,
- *    and names the project folder with --dir. A folder's node_modules/.bin, a `.` in PATH or a direnv
- *    therefore cannot put another `joxo` in the way. Without those options the mod runs nothing. `joxo pulse` is read-only: it refreshes the roster the way `joxo sync` does and
- *    acknowledges nothing, so reading it never uses up a teammate's message the agent has not seen.
+ *  - asks the plugin's own MCP server (the entry in .mcp.json) for the read it draws, and, only when a
+ *    person presses Take or Open on web, to claim a task or open the project in the browser. It does that
+ *    with $.mcp.call and starts no program itself: no command, no process, no shell. The server is
+ *    the one the plugin declares, `joxo mcp --if-paired --channel-only`, started by Claude Code from the
+ *    absolute paths `joxo setup` records. Without it the mod has nothing to read and shows nothing.
  *  - draws and toasts what it read, as text.
  *  - remembers which messages it already toasted, in its own $.store.
  *
@@ -20,7 +18,7 @@
  */
 import type { EngineInterface, Register, UiPressArgument } from 'claude-code'
 
-import { bandGroups, commandFrom, fitGroups, hasNews, isAbsolute, nextDelayMs, paneModel, parsePulse, pickToasts, plain, signature, statusText, summaryLines } from './model.ts'
+import { bandGroups, fitGroups, hasNews, nextDelayMs, paneModel, parsePulse, pickToasts, plain, signature, statusText, summaryLines } from './model.ts'
 import type { Reading } from './model.ts'
 import { bandView, emptyPaneView, paneView } from './views.tsx'
 import type { Actions } from './views.tsx'
@@ -38,14 +36,15 @@ let hiddenAt: string | null = null
 let folder: string | null = null
 let toastLog: number[] = []
 let timer: { cancel: () => void } | null = null
-/** Where joxo is, from the plugin's options; null until `joxo setup` has recorded it. */
-let joxo: { argv: readonly string[]; home: string } | null = null
+/** The plugin's own MCP server (the entry in .mcp.json): the one thing the mod talks to. */
+const SERVER = 'plugin:joxo:joxo'
 
-/** Run joxo from its own folder, never from the project's, and name the project with --dir. */
-async function runJoxo($: EngineInterface, args: readonly string[], dir: string | null, timeoutMs: number) {
-  if (joxo === null) return null
-  const where = dir !== null && isAbsolute(dir) ? ['--dir', dir] : []
-  return $.process.run([...joxo.argv, ...args, ...where], { cwd: joxo.home, timeoutMs }).catch(() => null)
+/** Ask the plugin's MCP server; a server that is not running, or does not know the call, answers null. */
+async function askServer($: EngineInterface, tool: string, args: Readonly<Record<string, unknown>>) {
+  const answer = await $.mcp.call(SERVER, tool, args).catch(() => null)
+  if (answer === null) return null
+  const stdout = answer.content.map(block => (block.type === 'text' ? block.text : '')).join('\n')
+  return answer.isError ? { exitCode: 1, stdout: '', stderr: stdout } : { exitCode: 0, stdout, stderr: '' }
 }
 
 /** Hold the last good picture when a look fails, marked as stale rather than dropped. */
@@ -71,15 +70,12 @@ async function lookOnce($: EngineInterface): Promise<void> {
   let isDormant = false
   try {
     const cwd = await $.session.cwd()
-    // No recorded joxo, a joxo that is not installed, a folder that is not paired: nothing to show, and
-    // nothing to say about it (no status entry, no "offline") in folders that have nothing to do with Joxo.
-    const ran = await runJoxo($, ['pulse', '--json'], cwd, 25_000)
+    // No running server (Joxo not set up, a folder that is not paired): nothing to show, and nothing to
+    // say about it (no status entry, no "offline") in folders that have nothing to do with Joxo.
+    const ran = await askServer($, 'team_view', { dir: cwd })
     lastLookAt = await $.clock.now()
-    if (joxo === null) {
-      reading = { kind: 'error', reason: 'one step left: ask your agent to run joxo setup, so this panel knows where joxo is' }
-      isDormant = true
-    } else if (ran === null || ran.exitCode === 127 || ran.exitCode === 126) {
-      reading = reading?.kind === 'ok' ? afterFailure(reading, '') : { kind: 'error', reason: 'the joxo command could not be started' }
+    if (ran === null) {
+      reading = reading?.kind === 'ok' ? afterFailure(reading, '') : { kind: 'error', reason: 'Joxo\u2019s server is not running here' }
       isDormant = reading.kind !== 'ok'
       failures += 1
     } else if (ran.exitCode !== 0) {
@@ -117,14 +113,14 @@ async function lookOnce($: EngineInterface): Promise<void> {
 async function takeTask($: EngineInterface, id: string): Promise<void> {
   if (!SAFE_ID.test(id)) return
   const title = reading?.kind === 'ok' ? reading.pulse.tasks.find(t => t.id === id)?.title : undefined
-  const ran = await runJoxo($, ['task', 'claim', id], folder, 30_000)
+  const ran = await askServer($, 'team_take', { id, ...(folder === null ? {} : { dir: folder }) })
   if (ran !== null && ran.exitCode === 0) $.ui.toast(`Taken: ${plain(title ?? 'the task', 60)}. It is yours now.`)
   else $.ui.toast(plain(ran?.stderr || ran?.stdout || 'Could not take it right now.', 120) || 'Could not take it right now.')
   await look($)
 }
 
 async function openOnWeb($: EngineInterface): Promise<void> {
-  const ran = await runJoxo($, ['open'], folder, 30_000)
+  const ran = await askServer($, 'team_open', folder === null ? {} : { dir: folder })
   $.ui.toast(ran !== null && ran.exitCode === 0 ? 'Opening Joxo in your browser.' : 'Could not open Joxo in the browser.')
 }
 
@@ -148,15 +144,13 @@ function makeActions($: EngineInterface): Actions {
 
 /** What to say in a pane that has no picture to draw yet. */
 function emptyMessage(): string {
-  if (joxo === null) return 'One step left: ask your agent to run joxo setup here. It records where joxo is, so this panel never has to look it up.'
   if (reading === null) return 'Reading your project…'
   if (reading.kind === 'unpaired') return 'This folder is not connected to a Joxo project. Ask your agent to “set up Joxo”.'
   if (reading.kind === 'error') return `Joxo is not reachable from here (${reading.reason}).`
   return ''
 }
 
-export const register: Register = (on, options) => {
-  joxo = commandFrom(options)
+export const register: Register = (on) => {
   on('session.start', async ($, e, next) => {
     // Not `joxo`: that name is the plugin's own (/joxo:joxo, the setup skill) and Claude Code refuses it.
     await $.command.register({

@@ -1,7 +1,7 @@
 import { expect, mock, test } from 'claude-code/testing'
 import type { Engine } from 'claude-code/testing'
 
-import { NOW_MS, SETUP, TEAM, json } from './fixtures.ts'
+import { NOW_MS, TEAM, json } from './fixtures.ts'
 import { textOf } from './render-text.ts'
 
 /**
@@ -14,12 +14,12 @@ declare const console: { log: (...args: unknown[]) => void }
 const BAND = { hasSurvey: false, isWorking: false, maxRows: 4, bodyColumns: 110, scroll: { offset: 0, bodyRows: 4 }, view: {} }
 const PANE = { title: 'Joxo', isFocused: true, bodyColumns: 100, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} } as const
 
-test('captures: band and pane on the terminal and in the desktop app', { options: SETUP }, async ($: Engine, on) => {
+test('captures: band and pane on the terminal and in the desktop app', async ($: Engine, on) => {
   mock.clock(on, { now: NOW_MS })
   mock.store(on, {})
   on('session.cwd', () => ({ value: '/work/launch' }))
   on('session.surfaces', () => ({ value: [] }))
-  on('process.run', () => ({ value: { exitCode: 0, stdout: json(TEAM), stderr: '', isStdoutTruncated: false, isStderrTruncated: false } }))
+  on('mcp.call', () => ({ value: { content: [{ type: 'text', text: json(TEAM) }], isError: false } }))
   await $.command.run({ command: 'team', args: '' } as Parameters<Engine['command']['run']>[0])
   for (const surface of ['terminal', 'desktop'] as const) {
     const band = await $.ui.mount({ plugin: 'joxo', surface, component: 'AbovePrompt', props: BAND })

@@ -46,13 +46,6 @@ const ABSOLUTE = /^(\/|[A-Za-z]:[\\/])/
 // oxlint-disable-next-line typescript/no-misused-spread -- Only code points below 32 are looked at; splitting is fine.
 export const isAbsolute = (value: unknown): value is string => typeof value === 'string' && ABSOLUTE.test(value) && value.length < 1024 && ![...value].some(char => (char.codePointAt(0) ?? 0) < 32)
 
-/** The command prefix from the plugin's options: node and joxo.mjs by absolute path, and the folder joxo.mjs is in. */
-export function commandFrom(options: Readonly<Record<string, unknown>>): { argv: readonly string[]; home: string } | null {
-  const { nodePath, joxoPath } = options
-  if (!isAbsolute(nodePath) || !isAbsolute(joxoPath)) return null
-  return { argv: [nodePath, joxoPath], home: joxoPath.replace(/[\\/][^\\/]*$/, '') || '/' }
-}
-
 export type Attention = 'permission' | 'question' | 'finished'
 export type Session = { agent: string; folder: string | null; name: string | null; isActive: boolean; attention: Attention | null; lastActiveAt: string | null }
 export type Peer = { id: string; name: string; owner: string | null; isOnline: boolean; sessions: Session[] | 'hidden'; workingOn: string | null; lastSeen: string | null }
