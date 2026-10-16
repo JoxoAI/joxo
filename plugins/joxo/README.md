@@ -30,9 +30,10 @@ first: the plugin holds no Joxo program of its own.
   through PATH. (`nodePath` carries the default `node` only so the entry names its program; without
   `joxoPath` nothing starts.) It offers three small calls for the team view and is silent outside a
   folder paired with a Joxo project.
-- The mod (`hooks/`) starts no program. It draws what that server returns, and when you press
-  **Take** or **Open on web** it asks the same server to claim the task or open the project in your
-  browser. `hooks.json` has no settings hooks. It keeps one list of messages it already showed in its
+- The mod (`hooks/`) starts no program and makes no network call. It calls three tools of that server
+  itself, without the model asking: `team_view` (every 30 seconds to 10 minutes, to draw the view),
+  `team_take` (only when you press **Take**, to claim that task) and `team_open` (only when you press
+  **Open on web**, to open the project in your browser). `hooks.json` has no settings hooks. It keeps one list of messages it already showed in its
   own store.
 - The skill holds no command. It points your agent to https://joxo.ai/skill.md when you ask for setup.
 
