@@ -40,6 +40,8 @@ Install the Joxo app first (https://joxo.ai/install): the plugin holds no Joxo p
 
 Only the Joxo server above talks to the network, to joxo.ai, for your own project: what your agent
 publishes on purpose (handoffs, decisions, blockers, tasks, messages), computer names and a capacity
-summary. The mod and the skill send nothing and read no credentials, transcripts or files.
+summary. The mod passes that local server only the session's folder path (so it reads the right
+project) and, when you press **Take**, that task's id. The mod and the skill read no credentials,
+conversation, transcripts or files, and send nothing anywhere else.
 
 [Privacy](https://joxo.ai/privacy) · [Terms](https://joxo.ai/terms) · [Support](https://joxo.ai/support)
