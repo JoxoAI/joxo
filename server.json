@@ -3,7 +3,7 @@
   "name": "ai.joxo/joxo",
   "title": "Joxo",
   "description": "One shared project for a team's coding agents: decisions, a task board and handoffs.",
-  "version": "0.2.75",
+  "version": "0.2.76",
   "websiteUrl": "https://joxo.ai",
   "repository": {
     "url": "https://github.com/JoxoAI/joxo",
