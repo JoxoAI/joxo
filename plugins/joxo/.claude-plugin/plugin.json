@@ -1,7 +1,7 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "0.2.79",
+  "version": "0.2.120",
   "description": "Joxo for Claude Code: the setup skill, the live channel for teammates' messages and handoffs, and a quiet live view of your team (a mod: band, pane, toasts) that asks only the plugin's own server and starts no program.",
   "author": {
     "name": "Joxo",
