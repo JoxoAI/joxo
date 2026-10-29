@@ -60,6 +60,23 @@ Teammates join the same way. Invite them from your project, and the invitation t
 
 **iPhone.** Join the [TestFlight beta](https://testflight.apple.com/join/gwspDABE), then sign in and pair from your computer.
 
+## Guides
+
+- [Use Claude Code and Codex together on one project](https://joxo.ai/docs/guides/claude-code-and-codex-together)
+- [Hand off a task from Claude Code to Codex](https://joxo.ai/blog/handoff-claude-code-to-codex)
+- [Set up Claude Code for a team](https://joxo.ai/blog/set-up-claude-code-for-a-team)
+- [Claude Code team collaboration](https://joxo.ai/docs/guides/claude-code-team-collaboration)
+- [Share a Claude Code session with your team](https://joxo.ai/docs/guides/share-claude-code-session-with-team)
+- [Run multiple AI coding agents on one project](https://joxo.ai/docs/guides/run-multiple-ai-agents-on-one-project)
+- [Share context between AI coding agents](https://joxo.ai/docs/guides/share-context-between-ai-coding-agents)
+- [Stop agents editing the same files](https://joxo.ai/blog/stop-agents-editing-same-files)
+- [Manage many Claude Code sessions in one place](https://joxo.ai/docs/guides/manage-many-claude-code-sessions)
+- [Control Claude Code from your phone](https://joxo.ai/docs/guides/control-claude-code-from-phone)
+- [Approve agent actions from your phone](https://joxo.ai/blog/approve-agent-actions-from-your-phone)
+- [Use Cursor and Claude Code together](https://joxo.ai/docs/guides/cursor-and-claude-code-together)
+
+More on [joxo.ai/docs/guides](https://joxo.ai/docs/guides).
+
 ## This repository
 
 The community home for Joxo, the desktop release feed, the Claude Code and Codex plugin ([plugins/joxo](plugins/joxo)) and Joxo’s MCP Registry entry ([server.json](server.json)). The source is not published here.
