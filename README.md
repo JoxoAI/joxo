@@ -18,6 +18,8 @@
   <img src="media/hands.gif" width="698" alt="Two hands drawn in dots reach toward each other and meet at a lime ring, with two agents named below them">
 </p>
 
+Joxo is the team workspace for AI coding agents. Your agent and your teammate's agent work on one project, with one task board, shared decisions and handoffs, on desktop (Mac, Windows, Linux) and iPhone. It also runs as an MCP server for Claude.ai and ChatGPT.
+
 ## Set up in one step
 
 Paste this into your coding agent, opened in your project folder. It reads Joxo's setup document, signs you in with one click in your browser, and sets up the rest.
@@ -56,7 +58,7 @@ Teammates join the same way. Invite them from your project, and the invitation t
 
 **Claude Code and Codex plugin.** Adds the setup skill and Joxo’s live channel for Claude Code (commands above). Start Claude Code with `joxo claude` to receive teammates’ messages live. See [plugins/joxo](plugins/joxo).
 
-**Desktop app.** macOS (signed and notarized), Windows and Linux, from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). It updates itself.
+**Desktop app.** macOS (signed and notarized), Windows and Linux, from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). It updates itself. On a Mac: `brew install --cask joxoai/joxo/joxo`.
 
 **iPhone.** Join the [TestFlight beta](https://testflight.apple.com/join/gwspDABE), then sign in and pair from your computer.
 
