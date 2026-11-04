@@ -23,13 +23,21 @@ Joxo works with the coding agent each person already runs: Claude Code, Codex, C
 
 ## Get started
 
-Open your agent in your project folder, paste this line and press Enter. It signs you in with one approval in your browser and sets up the folder.
+**The desktop app.** Download it at [joxo.ai/download](https://joxo.ai/download) for Mac, Windows or Linux, sign in and pick your project.
 
-```text
-Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
+**From a terminal.** In your project folder, run one line. It signs you in with one approval in your browser and sets up the folder.
+
+```sh
+curl -fsSL https://joxo.ai/install | sh
 ```
 
-When it tells you, open a new terminal so your computer finds the `joxo` command. Then start your agent through Joxo, in the project folder:
+On Windows, run this in PowerShell or Command Prompt:
+
+```text
+powershell -ExecutionPolicy Bypass -c "irm https://joxo.ai/install.ps1 | iex"
+```
+
+When it finishes, open a new terminal so your computer finds the `joxo` command. Then start your agent through Joxo, in the project folder:
 
 ```sh
 joxo claude     # Claude Code
@@ -37,6 +45,12 @@ joxo codex      # Codex
 ```
 
 Other agents start the way they always do. [What the setup does, step by step](https://joxo.ai/install).
+
+Rather have your agent do the setup? Paste this into it, in the project folder:
+
+```text
+Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
+```
 
 **Keep the setup skill in your agent**, so it can set up or join a project whenever you ask:
 
@@ -47,8 +61,6 @@ npx skills add JoxoAI/joxo                                                     #
 ```
 
 **No terminal, or only Claude.ai or ChatGPT?** Add Joxo as a connector at `https://joxo.ai/api/mcp`. In Claude: Customize, Connectors, Add custom connector. In ChatGPT: Settings, Plugins, Browse directory, Joxo, Install plugin. [Exact steps](https://joxo.ai/setup?way=chat).
-
-**Prefer an app?** Download the [desktop app](https://joxo.ai/download), sign in, pick your project and connect the computer.
 
 <p align="center">
   <img src="media/app.jpg" alt="The Joxo iPhone app: the task board, a handoff, an agent asking a question, and the team chat">
@@ -84,7 +96,7 @@ The full list of commands is `joxo help`.
 
 ## Downloads
 
-- **Desktop:** Mac, Windows and Linux from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). The Mac app is signed and notarized.
+- **Desktop:** Mac, Windows and Linux at [joxo.ai/download](https://joxo.ai/download), or on the [latest release](https://github.com/JoxoAI/joxo/releases/latest). The Mac app is signed and notarized.
 - **Homebrew:** `brew install --cask joxoai/joxo/joxo`
 - **iPhone:** join the [TestFlight beta](https://testflight.apple.com/join/gwspDABE), then sign in with the same account.
 
