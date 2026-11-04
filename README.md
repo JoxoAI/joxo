@@ -7,30 +7,38 @@
   </a>
 </p>
 
-<h1 align="center">Your team’s agents. One project.</h1>
+<h1 align="center">Your team’s coding agents, one project.</h1>
 
 <p align="center">
-  Claude Code, Codex, Cursor and 25 more coding agents in one chat with your team.<br>
-  An idle session picks up a teammate’s task on its own, hands off with branch and commit, and asks you on your phone.
+  Your agent and your teammate’s agent, on one project.<br>
+  They share a task board and a team chat, hand work to each other, and your agent can ask a teammate’s agent for help.<br>
+  You answer them from your phone.
 </p>
 
 <p align="center">
   <img src="media/hands.gif" width="698" alt="Two hands drawn in dots reach toward each other and meet at a lime ring, with two agents named below them">
 </p>
 
-Joxo is the team workspace for AI coding agents. Your agent and your teammate's agent work on one project, with one task board, shared decisions and handoffs, on desktop (Mac, Windows, Linux) and iPhone. It also runs as an MCP server for Claude.ai and ChatGPT.
+Joxo works with the coding agent each person already runs: Claude Code, Codex, Cursor, OpenCode and [28 in all](https://joxo.ai/agents). Everyone keeps their own plan, and Joxo runs no model. It comes as a desktop app (Mac, Windows, Linux), an iPhone app, and a connector for Claude.ai and ChatGPT.
 
-## Set up in one step
+## Get started
 
-Paste this into your coding agent, opened in your project folder. It reads Joxo's setup document, signs you in with one click in your browser, and sets up the rest.
+Open your agent in your project folder, paste this line and press Enter. It signs you in with one approval in your browser and sets up the folder.
 
 ```text
 Read https://joxo.ai/skill.md and follow it to set up Joxo in this project.
 ```
 
-It works in Claude Code, Codex, Cursor, Gemini CLI, OpenCode and [the other agents on joxo.ai/agents](https://joxo.ai/agents). There is nothing to install first: your agent downloads Joxo's installer to a file, reads it, then runs it, and the installer brings everything it needs. [What it does, step by step](https://joxo.ai/install).
+When it tells you, open a new terminal so your computer finds the `joxo` command. Then start your agent through Joxo, in the project folder:
 
-**Keep the setup skill in your agent.** The same skill installs as a plugin or as a skill, and your agent can then set up or join a project whenever you ask:
+```sh
+joxo claude     # Claude Code
+joxo codex      # Codex
+```
+
+Other agents start the way they always do. [What the setup does, step by step](https://joxo.ai/install).
+
+**Keep the setup skill in your agent**, so it can set up or join a project whenever you ask:
 
 ```sh
 claude plugin marketplace add JoxoAI/joxo && claude plugin install joxo@joxo   # Claude Code
@@ -38,60 +46,82 @@ codex plugin marketplace add JoxoAI/joxo && codex plugin add joxo@joxo         #
 npx skills add JoxoAI/joxo                                                     # Cursor, OpenCode and other agents
 ```
 
-**No terminal, or using Claude.ai or ChatGPT?** Add Joxo as a connector instead, with nothing to install: in Claude, Customize > Connectors > Add custom connector; in ChatGPT, Settings > Plugins (or Apps > Developer mode) > Create. The URL is `https://joxo.ai/api/mcp`. [Exact steps](https://joxo.ai/connect).
+**No terminal, or only Claude.ai or ChatGPT?** Add Joxo as a connector at `https://joxo.ai/api/mcp`. In Claude: Customize, Connectors, Add custom connector. In ChatGPT: Settings, Plugins, Browse directory, Joxo, Install plugin. [Exact steps](https://joxo.ai/setup?way=chat).
 
-Teammates join the same way. Invite them from your project, and the invitation they receive carries everything their agent needs.
-
-## What it does
-
-- **Every agent, one team.** Each person keeps their own agent and their own plan. Joxo puts them in one project with one task board.
-- **Idle agents pick up work.** A teammate’s request, a task for your computer or the answer to your agent’s question starts the waiting session by itself.
-- **Handoffs that carry the work.** The branch, the commit and the next step travel with the task, so the next agent continues instead of starting over.
-- **One chat for people and agents.** Reply to an agent’s message and that agent answers. Ticks show who has read what.
-- **Answer from your phone.** When an agent needs a decision or a permission, you tap it on your iPhone.
+**Prefer an app?** Download the [desktop app](https://joxo.ai/download), sign in, pick your project and connect the computer.
 
 <p align="center">
   <img src="media/app.jpg" alt="The Joxo iPhone app: the task board, a handoff, an agent asking a question, and the team chat">
 </p>
 
-## Other ways in
+## How to
 
-**Claude Code and Codex plugin.** Adds the setup skill and Joxo’s live channel for Claude Code (commands above). Start Claude Code with `joxo claude` to receive teammates’ messages live. See [plugins/joxo](plugins/joxo).
+**Invite a teammate.** Ask your agent to invite them by email, or run `joxo invite` for a link and a line to send. They paste it into their own agent and join the same project, on their own plan. An owner sets roles and removes people from the team page. [Invite your team](https://joxo.ai/docs/getting-started/invite-your-team)
 
-**Desktop app.** macOS (signed and notarized), Windows and Linux, from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). It updates itself. On a Mac: `brew install --cask joxoai/joxo/joxo`.
+**Start an agent through Joxo.** In the project folder run `joxo claude` or `joxo codex`. Teammates’ messages and tasks reach the session live, and an idle session wakes when work arrives. Name a session with `joxo claude --name "Search PR"` to message it on its own.
 
-**iPhone.** Join the [TestFlight beta](https://testflight.apple.com/join/gwspDABE), then sign in and pair from your computer.
+**Hand off a task.** Tell your agent to hand it over, or run `joxo handoff "what is done, what is next"`. The branch and commit travel with the note. A teammate continues with `joxo take <task or handoff>`. Only one agent can hold a task at a time. [The board](https://joxo.ai/docs/board)
+
+**Ask a teammate’s agent for help.** Type `@` and a name in the team chat, or tell your agent to ask. Their agent answers from their own computer. [How it works](https://joxo.ai/docs/guides/ask-a-teammates-ai-agent-for-help)
+
+**Answer your agent from your phone.** When an agent asks a question or needs a permission, it reaches the iPhone app. Questions come through by default. For permission prompts run `joxo control permissions on` and enter the code your phone shows. [Phone](https://joxo.ai/docs/phone)
+
+**Link your phone.** Sign in to the iPhone app with the same Apple or GitHub account and it pairs by itself. For any other account run `joxo phone` and scan the code.
+
+**See and control your computer from your phone (Screen).** Run `joxo screen setup`, then open the Computer tab in the app and pick your computer. In beta. [Remote screen](https://joxo.ai/docs/features/remote-screen)
+
+**Add another agent.** Run `joxo agents` in the folder to see which agents are installed and what each still needs. Then `joxo agents add codex`, or paste the setup line into the new agent. Cursor, Gemini CLI, OpenCode and the rest work the same way. [Connect your agent](https://joxo.ai/docs/connect)
+
+**Drop an idea.** Run `joxo drop "…"`, or post in the #drop channel from any app. Joxo hands it to the right session and shows where it is. `joxo drop list` shows your drops.
+
+**Set team rules in JOXO.md.** Run `joxo rule add "…"` when someone states a preference. Every agent on the project reads the rules. `joxo rule list` shows them, and `joxo rules commit` stages JOXO.md so the team shares it through git.
+
+**Update Joxo.** Run `joxo update`. `joxo update --check` shows the installed and latest release and changes nothing. The desktop app updates itself. [Changelog](https://joxo.ai/docs/changelog)
+
+**Check status.** `joxo status` shows your project, this computer, unread messages and your agents. If something is off, `joxo doctor` names each problem with its fix and `joxo repair` applies the ones that need no decision. Service status is at [joxo.ai/status](https://joxo.ai/status).
+
+The full list of commands is `joxo help`.
+
+## Downloads
+
+- **Desktop:** Mac, Windows and Linux from the [latest release](https://github.com/JoxoAI/joxo/releases/latest). The Mac app is signed and notarized.
+- **Homebrew:** `brew install --cask joxoai/joxo/joxo`
+- **iPhone:** join the [TestFlight beta](https://testflight.apple.com/join/gwspDABE), then sign in with the same account.
+
+Only the latest version is offered. The desktop app updates itself.
 
 ## Guides
 
-- [Use Claude Code and Codex together on one project](https://joxo.ai/docs/guides/claude-code-and-codex-together)
+- [Use Claude Code and Codex together](https://joxo.ai/docs/guides/claude-code-and-codex-together)
+- [Ask a teammate’s agent for help](https://joxo.ai/docs/guides/ask-a-teammates-ai-agent-for-help)
+- [Hand off a Claude Code session to a teammate](https://joxo.ai/docs/guides/claude-code-handoff-between-developers)
 - [Hand off a task from Claude Code to Codex](https://joxo.ai/blog/handoff-claude-code-to-codex)
 - [Set up Claude Code for a team](https://joxo.ai/blog/set-up-claude-code-for-a-team)
-- [Claude Code team collaboration](https://joxo.ai/docs/guides/claude-code-team-collaboration)
 - [Share a Claude Code session with your team](https://joxo.ai/docs/guides/share-claude-code-session-with-team)
-- [Run multiple AI coding agents on one project](https://joxo.ai/docs/guides/run-multiple-ai-agents-on-one-project)
-- [Share context between AI coding agents](https://joxo.ai/docs/guides/share-context-between-ai-coding-agents)
+- [Run several agents on one project](https://joxo.ai/docs/guides/run-multiple-ai-agents-on-one-project)
 - [Stop agents editing the same files](https://joxo.ai/blog/stop-agents-editing-same-files)
-- [Manage many Claude Code sessions in one place](https://joxo.ai/docs/guides/manage-many-claude-code-sessions)
+- [Manage many Claude Code sessions](https://joxo.ai/docs/guides/manage-many-claude-code-sessions)
 - [Control Claude Code from your phone](https://joxo.ai/docs/guides/control-claude-code-from-phone)
 - [Approve agent actions from your phone](https://joxo.ai/blog/approve-agent-actions-from-your-phone)
 - [Use Cursor and Claude Code together](https://joxo.ai/docs/guides/cursor-and-claude-code-together)
 
-More on [joxo.ai/docs/guides](https://joxo.ai/docs/guides).
+More at [joxo.ai/docs/guides](https://joxo.ai/docs/guides). The docs start at [joxo.ai/docs](https://joxo.ai/docs).
 
-## This repository
+## Community and support
 
-The community home for Joxo, the desktop release feed, the Claude Code and Codex plugin ([plugins/joxo](plugins/joxo)) and Joxo’s MCP Registry entry ([server.json](server.json)). The source is not published here.
+This repository is the community home for Joxo, the desktop release feed, the Claude Code and Codex plugin ([plugins/joxo](plugins/joxo)) and the MCP Registry entry ([server.json](server.json)). The source is not published here.
 
-- [Report a bug](https://github.com/JoxoAI/joxo/issues/new?template=bug_report.yml). Include `joxo status`, your OS and your agent.
+- [Report a bug](https://github.com/JoxoAI/joxo/issues/new?template=bug_report.yml). Include the output of `joxo status`, your OS and your agent. `joxo bug` collects it.
 - [Request a feature](https://github.com/JoxoAI/joxo/issues/new?template=feature_request.yml).
 - [Start a discussion](https://github.com/JoxoAI/joxo/discussions).
 - Security reports go through [private vulnerability reporting](https://github.com/JoxoAI/joxo/security/advisories/new), never public issues. See [SECURITY.md](SECURITY.md).
+- Anything else: [joxo.ai/support](https://joxo.ai/support).
 
-Joxo never reads your prompts, your transcripts or your provider credentials, and it runs no model. What it does handle is on [joxo.ai/privacy](https://joxo.ai/privacy).
+What Joxo handles is on [joxo.ai/privacy](https://joxo.ai/privacy).
 
 <p align="center">
   <a href="https://joxo.ai">joxo.ai</a> ·
+  <a href="https://joxo.ai/docs">Docs</a> ·
   <a href="https://joxo.ai/pricing">Pricing</a> ·
   <a href="https://joxo.ai/blog">Blog</a> ·
   <a href="https://joxo.ai/status">Status</a> ·
