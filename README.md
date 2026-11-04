@@ -101,10 +101,10 @@ Joxo never reads your prompts, your transcripts or your provider credentials, an
   <a href="https://www.instagram.com/joxo.ai">Instagram</a>
 </p>
 
-<div align="center">
-
-[![SPONSORED BY E2B FOR STARTUPS](https://img.shields.io/badge/SPONSORED%20BY-E2B%20FOR%20STARTUPS-ff3001?style=for-the-badge&labelColor=black)](https://e2b.dev/startups)
-
-</div>
+<p align="center">
+  <a href="https://e2b.dev/startups"><picture><source media="(prefers-color-scheme: dark)" srcset="media/programs/e2b-for-startups-outline-white.svg"><img src="media/programs/e2b-for-startups-orange.svg" alt="E2B for Startups" height="22"></picture></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://elevenlabs.io/startup-grants"><picture><source media="(prefers-color-scheme: dark)" srcset="media/programs/elevenlabs-grants-white.webp"><img src="media/programs/elevenlabs-grants.webp" alt="ElevenLabs Grants" height="15"></picture></a>&nbsp;&nbsp;&nbsp;
+  <a href="https://www.nvidia.com/en-us/startups/"><img src="media/programs/nvidia-inception-program-badge.svg" alt="NVIDIA Inception Program" height="32"></a>
+</p>
 
 <p align="center"><sub>© 2026 Joxo, Inc., a Delaware corporation. Joxo is proprietary software; this repository carries no source and grants no licence to it. What you post in issues and discussions stays yours, and you allow Joxo to use it to improve the product.</sub></p>
