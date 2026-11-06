@@ -194,8 +194,8 @@ export function ago(iso: string | null, now: number): string {
   if (!Number.isFinite(at)) return ''
   const seconds = Math.max(0, Math.round((now - at) / 1000))
   if (seconds < 45) return 'now'
-  if (seconds < 3600) return `${Math.max(1, Math.round(seconds / 60))}m`
-  if (seconds < 86_400) return `${Math.round(seconds / 3600)}h`
+  if (Math.round(seconds / 60) < 60) return `${Math.max(1, Math.round(seconds / 60))}m`
+  if (Math.round(seconds / 3600) < 24) return `${Math.round(seconds / 3600)}h`
   return `${Math.round(seconds / 86_400)}d`
 }
 
@@ -205,7 +205,7 @@ export function resetsIn(iso: string | null, now: number): string {
   if (!Number.isFinite(at) || at <= now) return ''
   const minutes = Math.round((at - now) / 60_000)
   if (minutes < 60) return `in ${minutes}m`
-  if (minutes < 48 * 60) return `in ${Math.round(minutes / 60)}h`
+  if (Math.round(minutes / 60) < 48) return `in ${Math.round(minutes / 60)}h`
   return `in ${Math.round(minutes / 1440)}d`
 }
 
