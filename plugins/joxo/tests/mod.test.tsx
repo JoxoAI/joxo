@@ -33,7 +33,7 @@ function world(on: On, pulses: unknown[], claim = { exitCode: 0, stdout: 'Claime
 const refresh = ($: Engine) => $.command.run({ command: 'team', args: '' } as Parameters<Engine['command']['run']>[0])
 /** `on` for event names picked from a list. */
 const anyOn = (on: On) => on as unknown as (event: string, hook: (_$: unknown, e: unknown, next: (e: unknown) => unknown) => unknown) => unknown
-const BAND = { hasSurvey: false, isWorking: false, maxRows: 4, bodyColumns: 120, scroll: { offset: 0, bodyRows: 4 }, view: {} }
+const BAND = { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 4, bodyColumns: 120, scroll: { offset: 0, bodyRows: 4 }, view: {} }
 const PANE = { title: 'Joxo', isFocused: true, bodyColumns: 100, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} } as const
 const QUIET = { ...TEAM, unread: 0, tasks: [], events: [], accounts: [], peers: TEAM.peers.map(p => ({ ...p, online: false })) }
 
@@ -52,7 +52,9 @@ test('the band says one quiet line on every surface that draws it', async ($, on
   await refresh($)
   for (const surface of ['terminal', 'desktop'] as const) {
     const ui = await $.ui.mount({ plugin: 'joxo', surface, component: 'AbovePrompt', props: BAND })
-    const line = textOf(await ui.drawn())
+    // Claude Code 2.1.33x draws its own content under the band (the stand-in's ENGINE line): the band is the first line.
+    const [line = '', ...below] = textOf(await ui.drawn()).split('\n')
+    expect(below.join('\n')).toBe('ENGINE')
     expect(line).toContain('Joxo')
     expect(line).toContain('Launch')
     expect(line).toContain('Hussain')
@@ -71,6 +73,14 @@ test('the band stays out of the way when there is nothing to say', async ($, on)
   const quiet = await $.ui.mount({ plugin: 'joxo', surface: 'terminal', component: 'AbovePrompt', props: BAND })
   expect(textOf(await quiet.drawn())).toBe('ENGINE')
   await quiet.unmount()
+})
+
+test('the band yields while the prompt area is collapsed', async ($, on) => {
+  world(on, [TEAM])
+  await refresh($)
+  const ui = await $.ui.mount({ plugin: 'joxo', surface: 'terminal', component: 'AbovePrompt', props: { ...BAND, isCollapsed: true } })
+  expect(textOf(await ui.drawn())).toBe('ENGINE')
+  await ui.unmount()
 })
 
 test('the band yields to a survey', async ($, on) => {

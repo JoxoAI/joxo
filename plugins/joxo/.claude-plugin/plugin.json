@@ -1,7 +1,7 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Joxo for Claude Code: the setup skill, a live channel for teammates' messages and handoffs, and a mod that shows your team's work as it happens.",
   "author": {
     "name": "Joxo",
@@ -37,5 +37,11 @@
       "description": "Absolute path of joxo.mjs (usually ~/.joxo/bin/joxo.mjs). `joxo setup` fills this in; leave it empty and run joxo setup.",
       "required": false
     }
-  }
+  },
+  "channels": [
+    {
+      "server": "joxo",
+      "displayName": "Joxo"
+    }
+  ]
 }
