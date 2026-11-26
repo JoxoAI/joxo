@@ -1,0 +1,20 @@
+{
+  "name": "joxo",
+  "interface": {
+    "displayName": "Joxo"
+  },
+  "plugins": [
+    {
+      "name": "joxo",
+      "source": {
+        "source": "local",
+        "path": "./plugins/joxo-codex"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
