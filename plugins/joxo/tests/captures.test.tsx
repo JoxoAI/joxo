@@ -11,7 +11,7 @@ import { textOf } from './render-text.ts'
 /** The test environment has no console type of its own; its output is what `claude plugin test` prints. */
 declare const console: { log: (...args: unknown[]) => void }
 
-const BAND = { hasSurvey: false, isWorking: false, maxRows: 4, bodyColumns: 110, scroll: { offset: 0, bodyRows: 4 }, view: {} }
+const BAND = { hasSurvey: false, isCollapsed: false, isWorking: false, maxRows: 4, bodyColumns: 110, scroll: { offset: 0, bodyRows: 4 }, view: {} }
 const PANE = { title: 'Joxo', isFocused: true, bodyColumns: 100, placement: 'dock', scroll: { offset: 0, bodyRows: 40 }, view: {} } as const
 
 test('captures: band and pane on the terminal and in the desktop app', async ($: Engine, on) => {
