@@ -1,7 +1,7 @@
 {
   "name": "joxo",
   "displayName": "Joxo",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Joxo for Claude Code: the setup skill, a live channel for teammates' messages and handoffs, and a mod that shows your team's work as it happens.",
   "author": {
     "name": "Joxo",
